@@ -1,0 +1,29 @@
+mode: backtest
+
+timezone: America/New_York
+
+data:
+  daily_provider: local
+  intraday_provider: local
+  daily_db_path: data/daily.db
+  intraday_db_path: data/intraday.db
+  symbols_db_path: data/symbols.db
+  account_db_path: data/account.db
+  logs_db_path: data/logs.db
+
+account:
+  account_source: local_virtual
+  initial_cash: 100000
+
+execution:
+  broker: mock
+  allow_fractional_default: false
+
+logging:
+  log_level: INFO
+  log_dir: logs
+
+strategy:
+  ma_windows: [5, 20, 60]
+  intraday_interval: 15m
+  last_bar_force_trade: true

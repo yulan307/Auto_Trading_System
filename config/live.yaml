@@ -1,0 +1,29 @@
+mode: live
+
+timezone: America/New_York
+
+data:
+  daily_provider: broker
+  intraday_provider: broker
+  daily_db_path: data/daily.db
+  intraday_db_path: data/intraday.db
+  symbols_db_path: data/symbols.db
+  account_db_path: data/account.db
+  logs_db_path: data/logs.db
+
+account:
+  account_source: broker
+  initial_cash: 0
+
+execution:
+  broker: broker
+  allow_fractional_default: false
+
+logging:
+  log_level: INFO
+  log_dir: logs
+
+strategy:
+  ma_windows: [5, 20, 60]
+  intraday_interval: 15m
+  last_bar_force_trade: true

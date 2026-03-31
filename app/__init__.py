@@ -1,0 +1,1 @@
+"""Auto trading system package."""
