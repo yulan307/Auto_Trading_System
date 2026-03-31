@@ -14,12 +14,13 @@ from app.symbols.models import SymbolInfo
 
 
 def test_load_config_resolves_project_paths() -> None:
+    expected_root = Path(__file__).resolve().parents[1]
     config = load_config("config/backtest.yaml")
 
     assert config["mode"] == "backtest"
     assert Path(config["data"]["daily_db_path"]).name == "daily.db"
     assert Path(config["logging"]["log_dir"]).name == "logs"
-    assert Path(config["project_root"]).name == "trading-system_codex"
+    assert Path(config["project_root"]) == expected_root
 
 
 def test_initialize_all_databases_creates_expected_tables(tmp_path: Path) -> None:
