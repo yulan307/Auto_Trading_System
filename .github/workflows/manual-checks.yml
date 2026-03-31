@@ -1,4 +1,4 @@
-name: Manual Checks
+name: Manual Repository Checks
 
 on:
   workflow_dispatch:
@@ -7,9 +7,44 @@ on:
         description: Python version
         required: false
         default: "3.12"
+      run-tests:
+        description: Run pytest suite
+        required: false
+        default: "true"
+      run-init-db:
+        description: Run init_db smoke check
+        required: false
+        default: "true"
+
+permissions:
+  contents: read
 
 jobs:
-  test:
+  repository-layout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify repository layout
+        run: |
+          test -d .github
+          test -d app
+          test -d backup
+          test -d config
+          test -d data
+          test -d docs
+          test -d logs
+          test -d scripts
+          test -d tests
+          test -f README.md
+          test -f requirements.txt
+          test -f .github/workflows/manual-checks.yml
+          test -f docs/system_design.md
+          test -f docs/changelog.md
+
+  python-checks:
+    needs: repository-layout
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -25,5 +60,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Run init_db smoke check
+        if: ${{ github.event.inputs.run-init-db != 'false' }}
+        run: python scripts/init_db.py --config config/backtest.yaml
+
       - name: Run tests
-        run: pytest
+        if: ${{ github.event.inputs.run-tests != 'false' }}
+        run: python -m pytest -q
