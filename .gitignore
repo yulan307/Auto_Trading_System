@@ -5,7 +5,10 @@ __pycache__/
 *.pyo
 *.pyd
 
-data/*.db
+# Ignore SQLite database files anywhere in the repo
+*.db
+*.sqlite
+*.sqlite3
 logs/*.log
 
 !.gitkeep
