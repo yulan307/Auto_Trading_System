@@ -24,6 +24,12 @@ class YFinanceProvider(BaseDataProvider):
         if frame is None or frame.empty:
             return []
         frame = frame.reset_index()
+        columns = getattr(frame, "columns", None)
+        if hasattr(columns, "to_flat_index"):
+            frame.columns = [
+                column[0] if isinstance(column, tuple) else column
+                for column in columns.to_flat_index()
+            ]
         frame = frame.rename(
             columns={
                 "Open": "open",
