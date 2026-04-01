@@ -4,7 +4,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from app.data.db import connect_sqlite
+from app.data.db import connect_sqlite, init_price_db
 
 
 TABLE_BY_INTERVAL = {"1d": "daily_bars", "15m": "intraday_bars"}
