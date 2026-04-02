@@ -6,6 +6,7 @@
 
 - `system_design.md`: top-level architecture, runtime modes, shared schema, development stages
 - `modules/`: formal module specifications used for implementation
+- `modules/minimal_closed_loop.md`: minimal end-to-end backtest loop plan, strategy definition, and usage
 - `research/`: exploratory notes that may change quickly
 - `changelog.md`: document and architecture change history
 
