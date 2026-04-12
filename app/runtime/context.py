@@ -9,6 +9,7 @@ class RuntimeContext:
     mode: str
     config: dict[str, Any]
     logger: Any
+    ml: dict[str, Any] | None = None
     daily_provider: Any | None = None
     intraday_provider: Any | None = None
     symbol_manager: Any | None = None
@@ -21,6 +22,7 @@ class RuntimeContext:
             "mode": self.mode,
             "config": self.config,
             "logger": self.logger,
+            "ml": self.ml,
             "daily_provider": self.daily_provider,
             "intraday_provider": self.intraday_provider,
             "symbol_manager": self.symbol_manager,

@@ -28,3 +28,8 @@ strategy:
   ma_windows: [5, 20, 60]
   intraday_interval: 15m
   last_bar_force_trade: true
+
+ml:
+  enabled: true
+  buy_model_version: buy/v001
+  sell_model_version: null

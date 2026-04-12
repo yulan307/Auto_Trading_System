@@ -37,6 +37,11 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "intraday_interval": "15m",
         "last_bar_force_trade": True,
     },
+    "ml": {
+        "enabled": True,
+        "buy_model_version": "buy/v001",
+        "sell_model_version": None,
+    },
 }
 
 VALID_MODES = {"backtest", "paper", "live"}
@@ -87,7 +92,11 @@ def _validate_config(config: dict[str, Any]) -> None:
     if mode not in VALID_MODES:
         raise ValueError(f"Unsupported mode: {mode!r}. Expected one of {sorted(VALID_MODES)}.")
 
-    missing_sections = [section for section in ("data", "account", "execution", "logging", "strategy") if section not in config]
+    missing_sections = [
+        section
+        for section in ("data", "account", "execution", "logging", "strategy", "ml")
+        if section not in config
+    ]
     if missing_sections:
         raise ValueError(f"Missing required config sections: {', '.join(missing_sections)}.")
 

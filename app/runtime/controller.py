@@ -12,6 +12,7 @@ def init_runtime(config_path: str) -> dict:
         mode=config["mode"],
         config=config,
         logger=logger,
+        ml=config.get("ml"),
         metadata={"config_path": str(config_path)},
     )
     logger.log_event(
@@ -19,6 +20,6 @@ def init_runtime(config_path: str) -> dict:
         module="runtime.controller",
         event_type="system_init",
         message="Runtime context initialized.",
-        payload={"mode": config["mode"]},
+        payload={"mode": config["mode"], "ml": config.get("ml")},
     )
     return runtime_context.to_dict()

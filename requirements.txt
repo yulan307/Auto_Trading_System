@@ -1,3 +1,4 @@
 PyYAML>=6.0
 pytest>=8.0
 yfinance>=0.2.65
+torch>=2.2
