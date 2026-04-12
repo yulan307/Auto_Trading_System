@@ -1,83 +1,37 @@
 # Data Layer
 
-## 目标
+## Overview
+The data layer stores raw market data in SQLite and exposes normalized read/write helpers that are reused by
+the trend feature store.
 
-提供统一的数据获取、清洗、落盘与读取接口，屏蔽不同数据源差异，并保证后续回测与实盘复用相同数据结构。
+## Databases
+- `data/daily.db`
+  Raw daily OHLCV bars in `daily_bars`
+- `data/intraday.db`
+  Raw intraday OHLCV bars in `intraday_bars`
+- `data/feature.db`
+  Derived daily trend features in `trend_features_daily`
 
-## 输入
+## Runtime Config
+`app/runtime/config_loader.py` resolves these paths from the `data` section:
+- `daily_db_path`
+- `intraday_db_path`
+- `feature_db_path`
+- `symbols_db_path`
+- `account_db_path`
+- `logs_db_path`
 
-- `ticker`
-- `interval`
-- `start_date`
-- `end_date`
-- `source`
+## Shared Helpers
+- `app.data.repository.save_bars(...)`
+- `app.data.repository.load_bars(...)`
+- `app.data.updater.update_symbol_data(...)`
+- `app.trend.features.init_feature_db(...)`
+- `app.trend.features.update_feature_db(...)`
 
-## 输出
+## Daily To Feature Dependency
+`feature.db` depends on `daily.db`.
+Feature generation always reads actual trade dates from `daily_bars`, computes `hist_*` / `fut_*` features on top
+of those rows, and upserts the result into `trend_features_daily`.
 
-- 标准化 OHLCV DataFrame
-- SQLite 中的 `daily_bars` / `intraday_bars`
-
-## 核心逻辑
-
-### 数据获取
-
-- 通过 provider 抽象统一调用 `yfinance`、`moomoo`、`ib`
-- 首版只要求正式实现 `yfinance`
-
-### 数据标准化
-
-- 重命名字段
-- 补全 `ticker` / `interval` / `source`
-- 统一时间列为 `datetime`
-- 去重、排序、检查数值合法性
-
-### 本地持久化
-
-- 使用 SQLite
-- `daily.db` 存 `daily_bars`
-- `intraday.db` 存 `intraday_bars`
-
-### 更新流程
-
-- provider 拉取数据
-- 标准化
-- 落盘
-- 返回更新摘要
-
-## 状态变量
-
-- `daily.db`
-- `intraday.db`
-- `daily_bars`
-- `intraday_bars`
-
-## 边界条件
-
-- provider 返回空数据
-- 字段缺失
-- 时间未排序
-- 重复 bar
-- `high/low` 不满足价格约束
-- 时区不一致
-
-## MVP范围
-
-- `yfinance`
-- 本地 SQLite
-- `1d` 与 `15m` 两种 interval
-- provider 抽象预留，`moomoo` / `ib` 暂不实现
-
-## 正式接口
-
-- `BaseDataProvider.fetch_bars(...)`
-- `normalize_ohlcv_dataframe(...)`
-- `save_bars(...)`
-- `load_bars(...)`
-- `update_symbol_data(...)`
-
-## 测试方案
-
-- 数据库初始化测试
-- 读写一致性测试
-- 标准化结果测试
-- `SPY` 日线数据样例测试
+When history is insufficient for a requested feature update window, the feature module refreshes `daily.db` through
+`YFinanceProvider` before recomputing the affected rows.

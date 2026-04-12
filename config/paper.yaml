@@ -6,6 +6,7 @@ data:
   daily_provider: local
   intraday_provider: local
   daily_db_path: data/daily.db
+  feature_db_path: data/feature.db
   intraday_db_path: data/intraday.db
   symbols_db_path: data/symbols.db
   account_db_path: data/account.db
