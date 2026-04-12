@@ -5,6 +5,7 @@
 ## Structure
 
 - `system_design.md`: top-level architecture, runtime modes, shared schema, development stages
+- `api_reference.md`: code-grounded API and module integration reference for collaborators and other AI agents
 - `modules/`: formal module specifications used for implementation
 - `modules/minimal_closed_loop.md`: minimal end-to-end backtest loop plan, strategy definition, and usage
 - `research/`: exploratory notes that may change quickly
@@ -27,4 +28,5 @@ The following root-level files were reviewed and consolidated into the formal do
 
 - Root-level Markdown files remain in place as source drafts and history references.
 - Formal updates should now prefer the `docs/` tree.
+- Interface-level collaboration and cross-module handoff should prefer `docs/api_reference.md` plus the relevant `docs/modules/*.md`.
 - The `backup/` directory is intentionally left untouched and should remain tracked in version control.

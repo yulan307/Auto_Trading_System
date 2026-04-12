@@ -84,6 +84,8 @@
 - [backtest_engine.md](modules/backtest_engine.md)
 - [logging_system.md](modules/logging_system.md)
 
+跨模块函数 I/O、共享对象、脚本入口与模块对接关系请见 [api_reference.md](api_reference.md)。
+
 ## 共享数据结构
 
 当前核心共享对象包括：
@@ -119,5 +121,6 @@
 
 - 先更新 `docs/` 下正式文档，再调整代码
 - 模块变更优先更新对应 `docs/modules/*.md`
+- 需要进行跨模块协作、接口对接或交接给其他 AI 时，优先同步更新 `docs/api_reference.md`
 - 研究性内容放入 `docs/research/`
 - 根目录与 `backup/` 中的 Markdown 文件保留为历史来源，不作为正式维护入口
