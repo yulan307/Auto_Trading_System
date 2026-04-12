@@ -5,8 +5,8 @@ import logging
 
 from app.trend.features import (
     DEFAULT_DAILY_DB_PATH,
+    DEFAULT_FEATURE_DB_PATH,
     DEFAULT_OUTPUT_CSV_DIR,
-    DEFAULT_OUTPUT_SQLITE_PATH,
     DEFAULT_TABLE_NAME,
     OUTPUT_COLUMNS,
     PERCENTILE_HISTORY_WINDOW,
@@ -24,31 +24,16 @@ LOGGER = logging.getLogger(__name__)
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Compute hist/fut research features with rolling percentiles and export CSV/SQLite outputs."
+        description="Update the shared feature store and export CSV research slices for the requested tickers."
     )
     parser.add_argument("--tickers", nargs="+", required=True, help="One or more ticker symbols.")
     parser.add_argument("--start-date", required=True, help="Research output start date in YYYY-MM-DD.")
     parser.add_argument("--end-date", required=True, help="Research output end date in YYYY-MM-DD.")
     parser.add_argument("--daily-db-path", default=str(DEFAULT_DAILY_DB_PATH))
-    parser.add_argument("--output-sqlite-path", default=str(DEFAULT_OUTPUT_SQLITE_PATH))
+    parser.add_argument("--feature-db-path", default=str(DEFAULT_FEATURE_DB_PATH))
     parser.add_argument("--output-csv-dir", default=str(DEFAULT_OUTPUT_CSV_DIR))
     parser.add_argument("--history-window", type=int, default=PERCENTILE_HISTORY_WINDOW)
-
-    update_group = parser.add_mutually_exclusive_group()
-    update_group.add_argument(
-        "--use-update",
-        dest="use_update",
-        action="store_true",
-        help="Fetch missing daily bars through yfinance before reading from the local daily DB.",
-    )
-    update_group.add_argument(
-        "--no-use-update",
-        dest="use_update",
-        action="store_false",
-        help="Use only bars already stored in the local daily DB.",
-    )
     parser.add_argument("--table-name", default=DEFAULT_TABLE_NAME)
-    parser.set_defaults(use_update=False)
     return parser
 
 
@@ -62,9 +47,8 @@ def main() -> int:
         start_date=args.start_date,
         end_date=args.end_date,
         daily_db_path=args.daily_db_path,
-        output_sqlite_path=args.output_sqlite_path,
+        feature_db_path=args.feature_db_path,
         output_csv_dir=args.output_csv_dir,
-        use_update=args.use_update,
         history_window=args.history_window,
         table_name=args.table_name,
     )

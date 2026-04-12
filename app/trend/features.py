@@ -13,9 +13,8 @@ import numpy as np
 import pandas as pd
 
 from app.data.db import connect_sqlite, init_price_db
-from app.data.providers.yfinance_provider import YFinanceProvider
 from app.data.repository import load_bars
-from app.data.updater import update_symbol_data
+from app.data.updater import update_daily_db
 
 
 LOGGER = logging.getLogger(__name__)
@@ -23,7 +22,6 @@ LOGGER = logging.getLogger(__name__)
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_DAILY_DB_PATH = PROJECT_ROOT / "data" / "daily.db"
 DEFAULT_FEATURE_DB_PATH = PROJECT_ROOT / "data" / "feature.db"
-DEFAULT_OUTPUT_SQLITE_PATH = PROJECT_ROOT / "data" / "processed" / "trend_features.db"
 DEFAULT_OUTPUT_CSV_DIR = PROJECT_ROOT / "data" / "processed" / "features"
 DEFAULT_TABLE_NAME = "trend_features_daily"
 
@@ -245,13 +243,14 @@ HIST_MAX_WINDOW = max(window for _, window in HIST_WINDOW_SPECS)
 HIST_WARMUP_BARS = HIST_MAX_WINDOW + (HIST_MAX_WINDOW - 1)
 TOTAL_WARMUP_BARS = HIST_WARMUP_BARS + PERCENTILE_HISTORY_WINDOW
 FUTURE_BACKFILL_BARS = max(right_offset for _, _, right_offset in FUT_WINDOW_SPECS)
+FUTURE_CONTEXT_CALENDAR_DAYS = 31
 
 
 @dataclass(slots=True)
 class TrendFeatureRunResult:
     combined_df: pd.DataFrame
     csv_paths: list[Path]
-    sqlite_rows_written: int
+    feature_rows_loaded: int
     failed_tickers: list[str]
 
 
@@ -377,34 +376,6 @@ def _load_daily_frame(
     return _prepare_price_frame(pd.DataFrame(bars), ticker=ticker)
 
 
-def _update_daily_bars_from_yfinance(
-    *,
-    ticker: str,
-    start_date: str | date | datetime,
-    end_date: str | date | datetime,
-    daily_db_path: str | Path = DEFAULT_DAILY_DB_PATH,
-) -> dict[str, Any]:
-    start = _coerce_date(start_date)
-    end = _coerce_date(end_date)
-    LOGGER.info(
-        "daily_refresh_start ticker=%s start=%s end=%s",
-        ticker,
-        start.isoformat(),
-        end.isoformat(),
-    )
-    result = update_symbol_data(
-        provider=YFinanceProvider(),
-        db_path=str(daily_db_path),
-        ticker=ticker,
-        interval="1d",
-        start_date=start,
-        end_date=end,
-        source="yfinance",
-    )
-    LOGGER.info("daily_refresh_done ticker=%s result=%s", ticker, result)
-    return result
-
-
 def load_daily_data_for_feature_research(
     *,
     ticker: str,
@@ -421,11 +392,11 @@ def load_daily_data_for_feature_research(
     init_price_db(daily_db_path, "daily_bars")
 
     if use_update:
-        _update_daily_bars_from_yfinance(
+        update_daily_db(
             ticker=ticker,
             start_date=fetch_start,
             end_date=end,
-            daily_db_path=daily_db_path,
+            db_path=daily_db_path,
         )
 
     prepared = _load_daily_frame(
@@ -837,9 +808,8 @@ def run_trend_feature_pipeline(
     start_date: str | date | datetime,
     end_date: str | date | datetime,
     daily_db_path: str | Path = DEFAULT_DAILY_DB_PATH,
-    output_sqlite_path: str | Path = DEFAULT_OUTPUT_SQLITE_PATH,
+    feature_db_path: str | Path = DEFAULT_FEATURE_DB_PATH,
     output_csv_dir: str | Path = DEFAULT_OUTPUT_CSV_DIR,
-    use_update: bool = False,
     history_window: int = PERCENTILE_HISTORY_WINDOW,
     table_name: str = DEFAULT_TABLE_NAME,
 ) -> TrendFeatureRunResult:
@@ -853,13 +823,21 @@ def run_trend_feature_pipeline(
     for ticker in tickers:
         try:
             LOGGER.info("ticker_start ticker=%s", ticker)
-            ticker_df = compute_trend_features_for_ticker(
+            update_feature_db(
                 ticker=ticker,
                 start_date=start_date,
                 end_date=end_date,
                 daily_db_path=daily_db_path,
-                use_update=use_update,
+                feature_db_path=feature_db_path,
                 history_window=history_window,
+                table_name=table_name,
+            )
+            ticker_df = load_feature_rows(
+                ticker=ticker,
+                start_date=start_date,
+                end_date=end_date,
+                feature_db_path=feature_db_path,
+                table_name=table_name,
             )
             csv_path = save_features_to_csv(ticker_df, ticker=ticker, output_csv_dir=output_csv_dir)
             LOGGER.info("csv_export_done ticker=%s rows=%s path=%s", ticker, len(ticker_df), csv_path)
@@ -873,15 +851,10 @@ def run_trend_feature_pipeline(
         raise RuntimeError(f"All tickers failed. failed_tickers={failed_tickers}")
 
     combined_df = pd.concat(success_frames, ignore_index=True)
-    sqlite_rows_written = save_features_to_sqlite(
-        combined_df,
-        sqlite_path=output_sqlite_path,
-        table_name=table_name,
-    )
     LOGGER.info(
-        "sqlite_export_done rows=%s path=%s table=%s failed_tickers=%s",
-        sqlite_rows_written,
-        output_sqlite_path,
+        "feature_pipeline_done rows=%s feature_db=%s table=%s failed_tickers=%s",
+        len(combined_df),
+        feature_db_path,
         table_name,
         failed_tickers,
     )
@@ -889,7 +862,7 @@ def run_trend_feature_pipeline(
     return TrendFeatureRunResult(
         combined_df=combined_df,
         csv_paths=csv_paths,
-        sqlite_rows_written=sqlite_rows_written,
+        feature_rows_loaded=len(combined_df),
         failed_tickers=failed_tickers,
     )
 
@@ -918,6 +891,36 @@ def _load_feature_dates(
             (ticker, start, end),
         ).fetchall()
     return [str(row["datetime"]) for row in rows]
+
+
+def load_feature_rows(
+    *,
+    ticker: str,
+    start_date: str | date | datetime,
+    end_date: str | date | datetime,
+    feature_db_path: str | Path = DEFAULT_FEATURE_DB_PATH,
+    table_name: str = DEFAULT_TABLE_NAME,
+) -> pd.DataFrame:
+    validated_table_name = _validate_identifier(table_name)
+    start = _coerce_date(start_date).isoformat()
+    end = _coerce_date(end_date).isoformat()
+    with connect_sqlite(feature_db_path) as connection:
+        _create_trend_feature_table(connection, validated_table_name)
+        _ensure_trend_feature_table_columns(connection, validated_table_name)
+        frame = pd.read_sql_query(
+            f"""
+            SELECT {", ".join(OUTPUT_COLUMNS)}
+            FROM {validated_table_name}
+            WHERE ticker = ? AND datetime >= ? AND datetime <= ?
+            ORDER BY datetime ASC
+            """,
+            connection,
+            params=(ticker, start, end),
+        )
+
+    if frame.empty:
+        return pd.DataFrame(columns=OUTPUT_COLUMNS)
+    return frame.loc[:, list(OUTPUT_COLUMNS)].copy()
 
 
 def _find_missing_segments(target_dates: Sequence[str], existing_dates: set[str]) -> list[tuple[int, int]]:
@@ -952,27 +955,6 @@ def _resolve_actual_warmup_start(
     return str(daily_df.iloc[warmup_index]["datetime"])
 
 
-def _should_refresh_daily_window(
-    *,
-    daily_df: pd.DataFrame,
-    recalc_start_date: str,
-    segment_end_date: str,
-    history_window: int,
-) -> bool:
-    if daily_df.empty:
-        return True
-
-    available_dates = set(daily_df["datetime"].tolist())
-    if recalc_start_date not in available_dates or segment_end_date not in available_dates:
-        return True
-
-    matches = daily_df.index[daily_df["datetime"] == recalc_start_date]
-    if len(matches) == 0:
-        return True
-    target_index = int(matches[0])
-    return target_index < compute_total_warmup_bars(history_window=history_window)
-
-
 def _slice_feature_rows_for_dates(feature_df: pd.DataFrame, selected_dates: Sequence[str]) -> pd.DataFrame:
     if not selected_dates:
         return feature_df.iloc[0:0].copy()
@@ -1001,32 +983,43 @@ def update_feature_db(
 
     init_price_db(daily_db_path, "daily_bars")
     init_feature_db(feature_db_path=feature_db_path, table_name=table_name)
+    fetch_start_date = compute_fetch_start_date(start, history_window=history_window)
 
-    target_daily_df = _load_daily_frame(
+    update_daily_db(
         ticker=ticker,
-        start_date=start,
+        start_date=fetch_start_date,
         end_date=end,
+        db_path=daily_db_path,
+    )
+
+    future_context_end = end + timedelta(days=FUTURE_CONTEXT_CALENDAR_DAYS)
+    full_daily_df = _load_daily_frame(
+        ticker=ticker,
+        start_date=fetch_start_date,
+        end_date=future_context_end,
         daily_db_path=daily_db_path,
     )
-    if target_daily_df.empty:
-        _update_daily_bars_from_yfinance(
-            ticker=ticker,
-            start_date=start,
-            end_date=end,
-            daily_db_path=daily_db_path,
+    if full_daily_df.empty:
+        raise RuntimeError(
+            f"No daily bars found for ticker={ticker} in range=[{fetch_start_date}, {future_context_end.isoformat()}]."
         )
-        target_daily_df = _load_daily_frame(
-            ticker=ticker,
-            start_date=start,
-            end_date=end,
-            daily_db_path=daily_db_path,
-        )
+
+    target_daily_df = (
+        full_daily_df.loc[
+            (full_daily_df["datetime"] >= start.isoformat())
+            & (full_daily_df["datetime"] <= end.isoformat())
+        ]
+        .sort_values("datetime", ascending=True)
+        .reset_index(drop=True)
+    )
     if target_daily_df.empty:
         raise RuntimeError(
             f"No daily bars found for ticker={ticker} in range=[{start.isoformat()}, {end.isoformat()}]."
         )
 
     target_dates = target_daily_df["datetime"].tolist()
+    full_daily_dates = full_daily_df["datetime"].tolist()
+    daily_index_by_date = {value: index for index, value in enumerate(full_daily_dates)}
     existing_feature_dates = set(
         _load_feature_dates(
             ticker=ticker,
@@ -1043,73 +1036,42 @@ def update_feature_db(
     for segment_start_index, segment_end_index in missing_segments:
         segment_start_date = target_dates[segment_start_index]
         segment_end_date = target_dates[segment_end_index]
-        fetch_start_date = compute_fetch_start_date(segment_start_date, history_window=history_window)
-
-        segment_daily_df = _load_daily_frame(
-            ticker=ticker,
-            start_date=fetch_start_date,
-            end_date=segment_end_date,
-            daily_db_path=daily_db_path,
-        )
-        if _should_refresh_daily_window(
-            daily_df=segment_daily_df,
-            recalc_start_date=segment_start_date,
-            segment_end_date=segment_end_date,
-            history_window=history_window,
-        ):
-            _update_daily_bars_from_yfinance(
-                ticker=ticker,
-                start_date=fetch_start_date,
-                end_date=segment_end_date,
-                daily_db_path=daily_db_path,
-            )
-            segment_daily_df = _load_daily_frame(
-                ticker=ticker,
-                start_date=fetch_start_date,
-                end_date=segment_end_date,
-                daily_db_path=daily_db_path,
-            )
-
-        if segment_daily_df.empty:
-            raise RuntimeError(
-                f"No daily bars found for ticker={ticker} in range=[{fetch_start_date}, {segment_end_date}]."
-            )
-
-        segment_daily_dates = segment_daily_df["datetime"].tolist()
-        start_matches = [index for index, value in enumerate(segment_daily_dates) if value == segment_start_date]
-        end_matches = [index for index, value in enumerate(segment_daily_dates) if value == segment_end_date]
-        if not start_matches or not end_matches:
+        segment_start_full_index = daily_index_by_date.get(segment_start_date)
+        segment_end_full_index = daily_index_by_date.get(segment_end_date)
+        if segment_start_full_index is None or segment_end_full_index is None:
             raise RuntimeError(
                 f"Could not align daily rows for ticker={ticker} segment=[{segment_start_date}, {segment_end_date}]."
             )
-        recalc_start_index = max(0, start_matches[0] - FUTURE_BACKFILL_BARS)
-        recalc_end_index = end_matches[0]
-        recalc_dates = segment_daily_dates[recalc_start_index : recalc_end_index + 1]
-        recalc_start_date = recalc_dates[0]
-        existing_recalc_dates = set(
+
+        recalc_start_index = max(0, segment_start_full_index - FUTURE_BACKFILL_BARS)
+        compute_end_index = min(len(full_daily_dates) - 1, segment_end_full_index + FUTURE_BACKFILL_BARS)
+        recalc_start_date = full_daily_dates[recalc_start_index]
+        compute_end_date = full_daily_dates[compute_end_index]
+        left_backfill_dates = full_daily_dates[recalc_start_index:segment_start_full_index]
+        missing_dates = target_dates[segment_start_index : segment_end_index + 1]
+        existing_left_feature_dates = set(
             _load_feature_dates(
                 ticker=ticker,
                 start_date=recalc_start_date,
-                end_date=segment_end_date,
+                end_date=segment_start_date,
                 feature_db_path=feature_db_path,
                 table_name=table_name,
             )
         )
         persist_dates = [
-            target_date
-            for target_date in recalc_dates
-            if target_date >= start.isoformat() or target_date in existing_recalc_dates
+            *[target_date for target_date in left_backfill_dates if target_date in existing_left_feature_dates],
+            *missing_dates,
         ]
 
         warmup_start_date = _resolve_actual_warmup_start(
-            daily_df=segment_daily_df,
+            daily_df=full_daily_df,
             target_start_date=recalc_start_date,
             history_window=history_window,
         )
         compute_daily_df = (
-            segment_daily_df.loc[
-                (segment_daily_df["datetime"] >= warmup_start_date)
-                & (segment_daily_df["datetime"] <= segment_end_date)
+            full_daily_df.loc[
+                (full_daily_df["datetime"] >= warmup_start_date)
+                & (full_daily_df["datetime"] <= compute_end_date)
             ]
             .sort_values("datetime", ascending=True)
             .reset_index(drop=True)
@@ -1126,7 +1088,6 @@ __all__ = [
     "DEFAULT_DAILY_DB_PATH",
     "DEFAULT_FEATURE_DB_PATH",
     "DEFAULT_OUTPUT_CSV_DIR",
-    "DEFAULT_OUTPUT_SQLITE_PATH",
     "DEFAULT_TABLE_NAME",
     "OUTPUT_COLUMNS",
     "PERCENTILE_HISTORY_WINDOW",
@@ -1142,6 +1103,7 @@ __all__ = [
     "compute_trend_features_for_ticker",
     "init_feature_db",
     "load_daily_data_for_feature_research",
+    "load_feature_rows",
     "order_output_by_midpoint",
     "run_trend_feature_pipeline",
     "save_features_to_csv",
