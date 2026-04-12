@@ -14,6 +14,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "daily_provider": "local",
         "intraday_provider": "local",
         "daily_db_path": "data/daily.db",
+        "feature_db_path": "data/feature.db",
         "intraday_db_path": "data/intraday.db",
         "symbols_db_path": "data/symbols.db",
         "account_db_path": "data/account.db",
@@ -61,6 +62,7 @@ def _resolve_runtime_paths(config: dict[str, Any], project_root: Path) -> dict[s
     resolved = deepcopy(config)
     path_keys = {
         "daily_db_path",
+        "feature_db_path",
         "intraday_db_path",
         "symbols_db_path",
         "account_db_path",

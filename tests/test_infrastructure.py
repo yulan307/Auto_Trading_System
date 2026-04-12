@@ -19,6 +19,7 @@ def test_load_config_resolves_project_paths() -> None:
 
     assert config["mode"] == "backtest"
     assert Path(config["data"]["daily_db_path"]).name == "daily.db"
+    assert Path(config["data"]["feature_db_path"]).name == "feature.db"
     assert Path(config["logging"]["log_dir"]).name == "logs"
     assert Path(config["project_root"]) == expected_root
 

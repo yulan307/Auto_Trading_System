@@ -146,6 +146,7 @@ def initialize_all_databases(config: dict[str, Any]) -> dict[str, str]:
     init_logs_db(data_config["logs_db_path"])
     return {
         "daily_db_path": data_config["daily_db_path"],
+        "feature_db_path": data_config.get("feature_db_path", ""),
         "intraday_db_path": data_config["intraday_db_path"],
         "symbols_db_path": data_config["symbols_db_path"],
         "account_db_path": data_config["account_db_path"],
