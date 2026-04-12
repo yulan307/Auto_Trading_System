@@ -9,6 +9,7 @@ Trend and strategy analysis should now use the feature store in `data/feature.db
 the shared `hist_*` feature columns instead.
 
 ## Replacement
+- Daily maintenance: `app.data.updater.update_daily_db(...)`
 - Feature generation: `app.trend.features.update_feature_db(...)`
-- Batch research export: `scripts/compute_trend_features.py`
+- Batch research export: `scripts/compute_trend_features.py` (reads from the shared `data/feature.db` cache)
 - Shared documentation: `docs/modules/trend_feature_store.md`

@@ -15,7 +15,9 @@ Trend analysis is now based on the reusable feature store in `app/trend/features
 - feature-store flow: active
 
 ## Recommended Usage
-1. Ensure daily bars exist in `data/daily.db`
-2. Call `update_feature_db(...)`
+1. Call `update_daily_db(...)` when raw daily coverage is needed directly
+2. Call `update_feature_db(...)` for feature cache maintenance
 3. Read `hist_*` rows from `trend_features_daily`
 4. Build strategy or research logic on top of those features
+
+`update_feature_db(...)` already depends on `update_daily_db(...)`, so most strategy flows only need the feature call.

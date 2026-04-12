@@ -22,6 +22,19 @@ CREATE TABLE IF NOT EXISTS {table_name} (
 CREATE INDEX IF NOT EXISTS idx_{table_name}_ticker_datetime ON {table_name} (ticker, datetime);
 """
 
+DAILY_COVERAGE_TABLE_SQL = """
+CREATE TABLE IF NOT EXISTS daily_coverage (
+    ticker TEXT NOT NULL,
+    interval TEXT NOT NULL,
+    date TEXT NOT NULL,
+    status TEXT NOT NULL,
+    source TEXT NOT NULL,
+    checked_at TEXT NOT NULL,
+    PRIMARY KEY (ticker, interval, date)
+);
+CREATE INDEX IF NOT EXISTS idx_daily_coverage_ticker_date ON daily_coverage (ticker, date);
+"""
+
 SYMBOLS_TABLE_SQL = """
 CREATE TABLE IF NOT EXISTS symbols (
     symbol TEXT PRIMARY KEY,
@@ -122,6 +135,11 @@ def init_price_db(db_path: str | Path, table_name: str) -> None:
         connection.executescript(PRICE_TABLE_SQL.format(table_name=table_name))
 
 
+def init_daily_coverage_table(db_path: str | Path) -> None:
+    with connect_sqlite(db_path) as connection:
+        connection.executescript(DAILY_COVERAGE_TABLE_SQL)
+
+
 def init_symbols_db(db_path: str | Path) -> None:
     with connect_sqlite(db_path) as connection:
         connection.executescript(SYMBOLS_TABLE_SQL)
@@ -140,6 +158,7 @@ def init_logs_db(db_path: str | Path) -> None:
 def initialize_all_databases(config: dict[str, Any]) -> dict[str, str]:
     data_config = config["data"]
     init_price_db(data_config["daily_db_path"], "daily_bars")
+    init_daily_coverage_table(data_config["daily_db_path"])
     init_price_db(data_config["intraday_db_path"], "intraday_bars")
     init_symbols_db(data_config["symbols_db_path"])
     init_account_db(data_config["account_db_path"])

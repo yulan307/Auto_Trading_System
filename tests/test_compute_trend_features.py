@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import sqlite3
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
@@ -10,6 +9,7 @@ import pytest
 
 from app.data.db import connect_sqlite, init_price_db
 from app.data.repository import save_bars
+from app.data.updater import update_daily_db
 from app.trend.features import (
     OUTPUT_COLUMNS,
     _compute_linear_slope,
@@ -19,7 +19,9 @@ from app.trend.features import (
     compute_total_warmup_bars,
     compute_trend_features_for_ticker,
     init_feature_db,
+    load_feature_rows,
     run_trend_feature_pipeline,
+    save_features_to_sqlite,
     update_feature_db,
 )
 
@@ -86,6 +88,26 @@ def _create_legacy_trend_feature_table(db_path: Path) -> None:
             )
             """
         )
+
+
+def _seed_feature_cache(
+    *,
+    daily_db_path: Path,
+    feature_db_path: Path,
+    ticker: str,
+    start_date: date,
+    end_date: date,
+    history_window: int,
+) -> pd.DataFrame:
+    feature_df = compute_trend_features_for_ticker(
+        ticker=ticker,
+        start_date=start_date,
+        end_date=end_date,
+        daily_db_path=daily_db_path,
+        history_window=history_window,
+    )
+    save_features_to_sqlite(feature_df, sqlite_path=feature_db_path)
+    return feature_df
 
 
 def test_compute_signed_rolling_percentile_separates_positive_negative_zero_and_history_rules() -> None:
@@ -164,46 +186,106 @@ def test_compute_trend_features_for_ticker_uses_hist_and_fut_time_semantics(tmp_
     assert spike_row["fut_low_dev_w"] == pytest.approx(expected_fut_low_dev_w)
 
 
-def test_run_trend_feature_pipeline_writes_new_outputs_and_migrates_legacy_sqlite(tmp_path: Path) -> None:
-    db_path = tmp_path / "daily.db"
-    output_sqlite_path = tmp_path / "processed" / "trend_features.db"
+def test_update_daily_db_tracks_calendar_coverage_and_skips_checked_ranges(tmp_path: Path) -> None:
+    daily_db_path = tmp_path / "daily.db"
+    calls: list[tuple[date, date]] = []
+
+    class FakeProvider:
+        def fetch_bars(self, ticker, interval, start_date, end_date):
+            start = start_date if isinstance(start_date, date) else start_date.date()
+            end = end_date if isinstance(end_date, date) else end_date.date()
+            calls.append((start, end))
+            rows = []
+            for current in _business_days(start, end):
+                rows.append(
+                    {
+                        "datetime": current,
+                        "open": 100.0,
+                        "high": 101.0,
+                        "low": 99.0,
+                        "close": 100.5,
+                        "volume": 1_000_000.0,
+                    }
+                )
+            return rows
+
+    start_date = date(2024, 1, 1)
+    end_date = date(2024, 1, 10)
+
+    first_result = update_daily_db(
+        "SPY",
+        start_date,
+        end_date,
+        db_path=daily_db_path,
+        provider=FakeProvider(),
+    )
+    second_result = update_daily_db(
+        "SPY",
+        start_date,
+        end_date,
+        db_path=daily_db_path,
+        provider=FakeProvider(),
+    )
+
+    assert first_result["segments_checked"] == 2
+    assert second_result["segments_checked"] == 0
+    assert len(calls) == 2
+
+    with connect_sqlite(daily_db_path) as connection:
+        coverage_rows = connection.execute(
+            """
+            SELECT date, status
+            FROM daily_coverage
+            WHERE ticker = 'SPY'
+            ORDER BY date ASC
+            """
+        ).fetchall()
+
+    assert len(coverage_rows) == 10
+    coverage_by_date = {row["date"]: row["status"] for row in coverage_rows}
+    assert coverage_by_date["2024-01-06"] == "checked_missing"
+    assert coverage_by_date["2024-01-07"] == "checked_missing"
+    assert coverage_by_date["2024-01-08"] == "valid"
+
+
+def test_run_trend_feature_pipeline_updates_feature_store_and_exports_csv(tmp_path: Path) -> None:
+    daily_db_path = tmp_path / "daily.db"
+    feature_db_path = tmp_path / "feature.db"
     output_csv_dir = tmp_path / "processed" / "features"
     seed_start = date(2022, 1, 3)
     start_date = date(2024, 1, 2)
     end_date = date(2024, 3, 29)
 
-    _seed_daily_db(db_path, ticker="SPY", start=seed_start, end=end_date, close_step=1.0)
-    _seed_daily_db(db_path, ticker="QQQ", start=seed_start, end=end_date, close_step=0.5)
-    _create_legacy_trend_feature_table(output_sqlite_path)
+    _seed_daily_db(daily_db_path, ticker="SPY", start=seed_start, end=end_date, close_step=1.0)
+    _seed_daily_db(daily_db_path, ticker="QQQ", start=seed_start, end=end_date, close_step=0.5)
+    _create_legacy_trend_feature_table(feature_db_path)
 
     result = run_trend_feature_pipeline(
         tickers=["SPY", "QQQ"],
         start_date=start_date,
         end_date=end_date,
-        daily_db_path=db_path,
-        output_sqlite_path=output_sqlite_path,
+        daily_db_path=daily_db_path,
+        feature_db_path=feature_db_path,
         output_csv_dir=output_csv_dir,
         history_window=30,
     )
 
     assert result.failed_tickers == []
     assert len(result.csv_paths) == 2
-    assert output_sqlite_path.exists()
+    assert result.feature_rows_loaded == len(result.combined_df)
 
     spy_csv = pd.read_csv(output_csv_dir / "SPY_trend_features.csv", encoding="utf-8-sig")
     assert set(spy_csv["ticker"]) == {"SPY"}
     assert spy_csv["datetime"].between(start_date.isoformat(), end_date.isoformat()).all()
     assert set(OUTPUT_COLUMNS).issubset(spy_csv.columns)
-    assert {"interval", "source", "update_time", "hist_open", "fut_ma_w"}.issubset(spy_csv.columns)
 
-    with connect_sqlite(output_sqlite_path) as connection:
+    with connect_sqlite(feature_db_path) as connection:
         row_count = connection.execute("SELECT COUNT(*) AS cnt FROM trend_features_daily").fetchone()["cnt"]
         sqlite_columns = {
             row["name"] for row in connection.execute("PRAGMA table_info(trend_features_daily)").fetchall()
         }
 
     assert row_count == len(result.combined_df)
-    assert row_count == result.sqlite_rows_written
     assert set(OUTPUT_COLUMNS).issubset(sqlite_columns)
 
 
@@ -238,36 +320,31 @@ def test_update_feature_db_writes_only_available_trade_dates(tmp_path: Path) -> 
         history_window=30,
     )
 
-    with connect_sqlite(feature_db_path) as connection:
-        rows = connection.execute(
-            """
-            SELECT datetime
-            FROM trend_features_daily
-            WHERE ticker = 'SPY'
-            ORDER BY datetime ASC
-            """
-        ).fetchall()
+    rows = load_feature_rows(
+        ticker="SPY",
+        start_date=start_date,
+        end_date=end_date,
+        feature_db_path=feature_db_path,
+    )
 
-    assert [row["datetime"] for row in rows] == expected_dates
+    assert rows["datetime"].tolist() == expected_dates
     assert "2024-01-06" not in expected_dates
     assert "2024-01-07" not in expected_dates
 
 
-def test_update_feature_db_uses_yfinance_updater_when_daily_history_is_insufficient(tmp_path: Path, monkeypatch) -> None:
+def test_update_feature_db_delegates_daily_sync_to_update_daily_db(tmp_path: Path, monkeypatch) -> None:
     daily_db_path = tmp_path / "daily.db"
     feature_db_path = tmp_path / "feature.db"
     start_date = date(2024, 1, 2)
     end_date = date(2024, 1, 31)
+    calls: list[tuple[str, date, date]] = []
 
-    _seed_daily_db(daily_db_path, ticker="SPY", start=start_date, end=end_date)
-    calls: list[tuple[date, date]] = []
-
-    def _fake_update_symbol_data(*, provider, db_path, ticker, interval, start_date, end_date, source):
-        calls.append((start_date, end_date))
+    def _fake_update_daily_db(ticker, start_date, end_date, *, db_path, **kwargs):
+        calls.append((ticker, start_date if isinstance(start_date, date) else date.fromisoformat(str(start_date)), end_date))
         _seed_daily_db(Path(db_path), ticker=ticker, start=date(2022, 1, 3), end=end_date)
         return {"saved": 1}
 
-    monkeypatch.setattr("app.trend.features.update_symbol_data", _fake_update_symbol_data)
+    monkeypatch.setattr("app.trend.features.update_daily_db", _fake_update_daily_db)
 
     result = update_feature_db(
         "SPY",
@@ -280,6 +357,9 @@ def test_update_feature_db_uses_yfinance_updater_when_daily_history_is_insuffici
 
     assert result is True
     assert calls
+    assert calls[0][0] == "SPY"
+    assert calls[0][1] < start_date
+    assert calls[0][2] == end_date
 
 
 def test_update_feature_db_backfills_recent_rows_when_future_window_matures(tmp_path: Path) -> None:
@@ -330,3 +410,71 @@ def test_update_feature_db_backfills_recent_rows_when_future_window_matures(tmp_
         ).fetchone()["fut_ma_m"]
 
     assert matured_value is not None
+
+
+def test_update_feature_db_reuses_existing_cached_ranges_outside_new_gaps(tmp_path: Path) -> None:
+    daily_db_path = tmp_path / "daily.db"
+    feature_db_path = tmp_path / "feature.db"
+    ticker = "SPY"
+    history_window = 30
+
+    _seed_daily_db(daily_db_path, ticker=ticker, start=date(2022, 1, 3), end=date(2026, 1, 31))
+    _seed_feature_cache(
+        daily_db_path=daily_db_path,
+        feature_db_path=feature_db_path,
+        ticker=ticker,
+        start_date=date(2024, 1, 2),
+        end_date=date(2024, 3, 29),
+        history_window=history_window,
+    )
+    cached_2025 = _seed_feature_cache(
+        daily_db_path=daily_db_path,
+        feature_db_path=feature_db_path,
+        ticker=ticker,
+        start_date=date(2025, 1, 2),
+        end_date=date(2025, 10, 31),
+        history_window=history_window,
+    )
+
+    sentinel_date = "2025-06-02"
+    cached_2025.loc[cached_2025["datetime"] == sentinel_date, "hist_ma_w"] = 12345.0
+    save_features_to_sqlite(cached_2025, sqlite_path=feature_db_path)
+
+    assert update_feature_db(
+        ticker,
+        date(2024, 1, 2),
+        date(2026, 1, 31),
+        daily_db_path=daily_db_path,
+        feature_db_path=feature_db_path,
+        history_window=history_window,
+    )
+
+    with connect_sqlite(feature_db_path) as connection:
+        sentinel_value = connection.execute(
+            """
+            SELECT hist_ma_w
+            FROM trend_features_daily
+            WHERE ticker = ? AND datetime = ?
+            """,
+            (ticker, sentinel_date),
+        ).fetchone()["hist_ma_w"]
+        gap_row = connection.execute(
+            """
+            SELECT COUNT(*) AS cnt
+            FROM trend_features_daily
+            WHERE ticker = ? AND datetime = '2024-06-03'
+            """,
+            (ticker,),
+        ).fetchone()["cnt"]
+        tail_row = connection.execute(
+            """
+            SELECT COUNT(*) AS cnt
+            FROM trend_features_daily
+            WHERE ticker = ? AND datetime = '2025-11-03'
+            """,
+            (ticker,),
+        ).fetchone()["cnt"]
+
+    assert sentinel_value == pytest.approx(12345.0)
+    assert gap_row == 1
+    assert tail_row == 1

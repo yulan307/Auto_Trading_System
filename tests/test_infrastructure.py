@@ -39,7 +39,7 @@ def test_initialize_all_databases_creates_expected_tables(tmp_path: Path) -> Non
 
     with sqlite3.connect(tmp_path / "daily.db") as connection:
         tables = {row[0] for row in connection.execute("SELECT name FROM sqlite_master WHERE type='table'")}
-        assert "daily_bars" in tables
+        assert {"daily_bars", "daily_coverage"} <= tables
 
     with sqlite3.connect(tmp_path / "account.db") as connection:
         tables = {row[0] for row in connection.execute("SELECT name FROM sqlite_master WHERE type='table'")}
