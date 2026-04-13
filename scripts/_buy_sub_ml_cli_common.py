@@ -106,3 +106,20 @@ def load_train_config_from_model_dir(model_dir: str) -> dict[str, Any]:
     if not config_path.exists():
         return {}
     return json.loads(config_path.read_text(encoding="utf-8"))
+
+
+def resolve_model_reference(
+    model_reference: str,
+    *,
+    model_root: str = str(DEFAULT_BUY_MODEL_ROOT),
+    registry_path: str = str(DEFAULT_BUY_REGISTRY_PATH),
+) -> dict[str, str | bool]:
+    normalized_registry_value, normalized_version_name = normalize_buy_model_version(model_reference)
+    models = list_available_models(model_root=model_root, registry_path=registry_path)
+    for item in models:
+        if (
+            str(item["registry_value"]) == normalized_registry_value
+            or str(item["version_name"]) == normalized_version_name
+        ):
+            return item
+    raise RuntimeError(f"未找到模型: {model_reference}")

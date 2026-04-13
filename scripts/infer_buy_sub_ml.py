@@ -19,7 +19,7 @@ from app.ml.common.paths import (
     DEFAULT_FEATURE_DB_PATH,
 )
 from app.ml.common.utils import normalize_tickers
-from scripts._buy_sub_ml_cli_common import prompt_model_selection
+from scripts._buy_sub_ml_cli_common import prompt_model_selection, resolve_model_reference
 
 
 LOGGER = logging.getLogger(__name__)
@@ -36,7 +36,27 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--model-root", default=str(DEFAULT_BUY_MODEL_ROOT))
     parser.add_argument("--registry-path", default=str(DEFAULT_BUY_REGISTRY_PATH))
     parser.add_argument("--output-dir", default=str(DEFAULT_BUY_TMP_OUTPUT_DIR))
+    parser.add_argument("--mode", choices=["infer"], help="Non-interactive mode. Use with --model.")
+    parser.add_argument("--model", help="Non-interactive model selection, e.g. buy/v001.")
     return parser
+
+
+def _select_model_interactive(args: argparse.Namespace) -> dict[str, str | bool]:
+    return prompt_model_selection(
+        model_root=args.model_root,
+        registry_path=args.registry_path,
+        title="请选择用于推理的模型：",
+    )
+
+
+def _select_model_non_interactive(args: argparse.Namespace) -> dict[str, str | bool]:
+    if not args.mode or not args.model:
+        raise RuntimeError("Non-interactive mode requires both --mode and --model.")
+    return resolve_model_reference(
+        args.model,
+        model_root=args.model_root,
+        registry_path=args.registry_path,
+    )
 
 
 def main() -> int:
@@ -45,11 +65,13 @@ def main() -> int:
     args = parser.parse_args()
 
     normalized_tickers = normalize_tickers(args.tickers)
-    selected_model = prompt_model_selection(
-        model_root=args.model_root,
-        registry_path=args.registry_path,
-        title="请选择用于推理的模型：",
-    )
+    if bool(args.mode) != bool(args.model):
+        raise RuntimeError("--mode and --model must be provided together, or both omitted for interactive mode.")
+
+    if args.mode and args.model:
+        selected_model = _select_model_non_interactive(args)
+    else:
+        selected_model = _select_model_interactive(args)
     selected_model_version = str(selected_model["registry_value"])
 
     output_paths: dict[str, str] = {}
@@ -68,6 +90,7 @@ def main() -> int:
 
     output = {
         "status": "ok",
+        "mode": "infer",
         "model_version": selected_model_version,
         "model_dir": selected_model["model_dir"],
         "tickers": normalized_tickers,
