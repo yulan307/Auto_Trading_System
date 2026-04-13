@@ -74,6 +74,7 @@ def test_infer_buy_strength_pct_writes_csv_with_expected_name(tmp_path, monkeypa
 
     output_path = infer_buy_strength_pct(
         tickers=["SPY"],
+        start_date="2024-03-03",
         end_date="2024-03-06",
         strength_pct_length_month=1,
         model_version="buy/v001",
@@ -85,4 +86,15 @@ def test_infer_buy_strength_pct_writes_csv_with_expected_name(tmp_path, monkeypa
 
     output_file = pd.read_csv(output_path)
     assert output_path.endswith("SPY_2024-03-06_buy_v001_strength_pct_pred.csv")
-    assert {"ticker", "date", "pred_strength_pct", "model_version"} <= set(output_file.columns)
+    assert output_file["date"].min() >= "2024-03-03"
+    assert output_file["date"].max() <= "2024-03-06"
+    assert {
+        "ticker",
+        "date",
+        "hist_open",
+        "hist_close",
+        "strength",
+        "strength_pct",
+        "pred_strength_pct",
+        "model_version",
+    } <= set(output_file.columns)

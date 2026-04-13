@@ -30,7 +30,7 @@ def build_buy_sub_ml_dataset(
         strength_db_path=strength_db_path,
     )
     if label_df.empty:
-        return pd.DataFrame(columns=["ticker", "date", "strength_pct"])
+        return pd.DataFrame(columns=["ticker", "date", "strength", "strength_pct"])
 
     start_date = str(label_df["date"].min())
     final_end_date = str(label_df["date"].max())
@@ -55,12 +55,12 @@ def build_buy_sub_ml_dataset(
         feature_frames.append(ticker_features.loc[:, ["ticker", "date", *hist_columns]].copy())
 
     if not feature_frames:
-        return pd.DataFrame(columns=["ticker", "date", "strength_pct"])
+        return pd.DataFrame(columns=["ticker", "date", "strength", "strength_pct"])
 
     feature_df = pd.concat(feature_frames, ignore_index=True)
     merged = label_df.merge(feature_df, on=["ticker", "date"], how="left")
     feature_columns = select_hist_feature_columns(merged)
-    dataset = merged.loc[:, ["ticker", "date", *feature_columns, "strength_pct"]].copy()
+    dataset = merged.loc[:, ["ticker", "date", "strength", *feature_columns, "strength_pct"]].copy()
     dataset = dataset.dropna(subset=[*feature_columns, "strength_pct"]).reset_index(drop=True)
 
     LOGGER.info(

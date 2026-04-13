@@ -43,6 +43,7 @@ def save_experiment_artifacts(
         encoding="utf-8",
     )
     predictions_df.to_csv(target_dir / "predictions.csv", index=False, encoding="utf-8-sig")
+    overall_metrics = metrics.get("overall", {})
     (target_dir / "notes.md").write_text(
         "\n".join(
             [
@@ -51,6 +52,8 @@ def save_experiment_artifacts(
                 f"- generated_at: {datetime.now(timezone.utc).isoformat()}",
                 f"- feature_count: {len(feature_columns)}",
                 f"- prediction_rows: {len(predictions_df)}",
+                f"- rmse: {overall_metrics.get('rmse')}",
+                f"- r2: {overall_metrics.get('r2')}",
             ]
         ),
         encoding="utf-8",

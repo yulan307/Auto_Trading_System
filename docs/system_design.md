@@ -83,6 +83,7 @@
 - [backtest_fill.md](modules/backtest_fill.md)
 - [backtest_engine.md](modules/backtest_engine.md)
 - [logging_system.md](modules/logging_system.md)
+- [buy_sub_ml.md](modules/buy_sub_ml.md)
 
 跨模块函数 I/O、共享对象、脚本入口与模块对接关系请见 [api_reference.md](api_reference.md)。
 
@@ -116,6 +117,20 @@
 5. 日内逻辑
 6. 执行层
 7. 回测引擎
+
+## ML 研究子系统
+
+当前 `app/ml/buy_sub_ml` 已沉淀为一个独立的离线建模模块，职责是：
+
+- 通过 `app/ml/buy_strength_label/get_strength_pct_frame` 获取 `strength` 与 `strength_pct`
+- 通过 `app/trend/features.load_feature_rows` 获取 `hist_*` 特征
+- 用全样本拟合的 `MLP -> Sigmoid` 回归模型学习 `hist_* -> strength_pct`
+- 对外暴露稳定的低层接口：
+  - `fit_strength_model(train_df)`
+  - `predict_strength_pct(hist_df, model_params)`
+- 在上层继续提供实验训练、模型发布与离线推理 CSV 导出能力
+
+模块细节与 CSV 产物格式见 [modules/buy_sub_ml.md](modules/buy_sub_ml.md)。
 
 ## 文档治理规则
 

@@ -4,7 +4,6 @@ from datetime import datetime, timezone
 
 from app.ml.buy_sub_ml.artifact import save_experiment_artifacts
 from app.ml.buy_sub_ml.dataset import build_buy_sub_ml_dataset
-from app.ml.buy_sub_ml.feature_selector import select_hist_feature_columns
 from app.ml.buy_sub_ml.trainer import train_buy_sub_ml_model
 from app.ml.common.paths import DEFAULT_BUY_STRENGTH_DB_PATH, DEFAULT_BUY_TMP_OUTPUT_DIR, DEFAULT_FEATURE_DB_PATH
 from app.ml.common.utils import coerce_date_str, ensure_directory, format_model_version_for_filename, normalize_tickers
@@ -29,8 +28,8 @@ def run_buy_sub_ml_experiment(
         feature_db_path=feature_db_path,
         strength_db_path=strength_db_path,
     )
-    feature_columns = select_hist_feature_columns(dataset_df)
-    train_result = train_buy_sub_ml_model(dataset_df, feature_columns=feature_columns, config=config)
+    train_result = train_buy_sub_ml_model(dataset_df, config=config)
+    feature_columns = list(train_result["model_params"]["feature_columns"])
 
     token = format_model_version_for_filename(model_version or "experiment")
     run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -46,12 +45,18 @@ def run_buy_sub_ml_experiment(
     )
 
     split_counts = train_result["split_counts"]
+    train_logs = train_result["train_logs"]
+    fit_metrics = train_logs["fullfit_metrics"]
     return {
         "tickers": normalized_tickers,
+        "sample_count": train_logs["sample_count"],
         "train_rows": split_counts["train_rows"],
         "valid_rows": split_counts["valid_rows"],
         "test_rows": split_counts["test_rows"],
         "feature_count": len(feature_columns),
+        "best_epoch": train_logs["best_epoch"],
+        "best_train_loss": train_logs["best_train_loss"],
+        "fit_metrics": fit_metrics,
         "artifact_dir": str(artifact_dir),
         "status": "ok",
     }

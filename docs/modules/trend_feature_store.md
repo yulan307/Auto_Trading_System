@@ -49,3 +49,4 @@ Existing feature rows outside those left-boundary backfill windows are reused as
 - `feature.db` is treated as a reusable cache, not a repair-oriented history rewrite store.
 - Old MA-only trend classification is deprecated and no longer the source of truth for strategy analysis.
 - New analysis work should read `hist_*` columns from `feature.db`.
+- `app/ml/buy_sub_ml` trains and infers strictly from these cached `hist_*` columns; it does not consume `fut_*` columns.

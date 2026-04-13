@@ -55,8 +55,9 @@ def test_build_buy_sub_ml_dataset_only_contains_hist_inputs_and_strength_pct(tmp
         strength_db_path=str(strength_db_path),
     )
 
-    feature_columns = [column for column in dataset.columns if column not in {"ticker", "date", "strength_pct"}]
+    feature_columns = [column for column in dataset.columns if column not in {"ticker", "date", "strength", "strength_pct"}]
     assert not dataset.empty
     assert feature_columns
     assert all(column.startswith("hist_") for column in feature_columns)
+    assert "strength" in dataset.columns
     assert "strength_pct" in dataset.columns
