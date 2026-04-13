@@ -1084,11 +1084,47 @@ def update_feature_db(
     return True
 
 
+# ---------------------------------------------------------------------------
+# Minimal MA features for the backtest engine
+# ---------------------------------------------------------------------------
+
+@dataclass(slots=True)
+class MAFeatures:
+    """Lightweight MA snapshot computed directly from a close-price sequence."""
+
+    ticker: str
+    trade_date: date
+    ma5: float
+    ma20: float
+    ma60: float
+    close: float
+
+
+def compute_ma_features(
+    *,
+    ticker: str,
+    trade_date: date,
+    closes: list[float],
+) -> MAFeatures:
+    """Compute simple moving averages from a growing list of close prices.
+
+    Called once per bar inside the backtest loop; requires at least 60 values
+    (the engine enforces MIN_TREND_BARS = 63 before the first call).
+    """
+    n = len(closes)
+    close = closes[-1]
+    ma5 = sum(closes[max(0, n - 5) :]) / min(n, 5)
+    ma20 = sum(closes[max(0, n - 20) :]) / min(n, 20)
+    ma60 = sum(closes[max(0, n - 60) :]) / min(n, 60)
+    return MAFeatures(ticker=ticker, trade_date=trade_date, ma5=ma5, ma20=ma20, ma60=ma60, close=close)
+
+
 __all__ = [
     "DEFAULT_DAILY_DB_PATH",
     "DEFAULT_FEATURE_DB_PATH",
     "DEFAULT_OUTPUT_CSV_DIR",
     "DEFAULT_TABLE_NAME",
+    "MAFeatures",
     "OUTPUT_COLUMNS",
     "PERCENTILE_HISTORY_WINDOW",
     "TrendFeatureRunResult",
@@ -1098,6 +1134,7 @@ __all__ = [
     "clip_to_output_range",
     "compute_fetch_start_date",
     "compute_hist_warmup_bars",
+    "compute_ma_features",
     "compute_signed_rolling_percentile",
     "compute_total_warmup_bars",
     "compute_trend_features_for_ticker",
