@@ -16,7 +16,6 @@ from app.trend.features import (
     compute_fetch_start_date,
     compute_hist_warmup_bars,
     compute_signed_rolling_percentile,
-    compute_total_warmup_bars,
     compute_trend_features_for_ticker,
     init_feature_db,
     load_feature_rows,
@@ -97,41 +96,61 @@ def _seed_feature_cache(
     ticker: str,
     start_date: date,
     end_date: date,
-    history_window: int,
 ) -> pd.DataFrame:
     feature_df = compute_trend_features_for_ticker(
         ticker=ticker,
         start_date=start_date,
         end_date=end_date,
         daily_db_path=daily_db_path,
-        history_window=history_window,
     )
     save_features_to_sqlite(feature_df, sqlite_path=feature_db_path)
     return feature_df
 
 
 def test_compute_signed_rolling_percentile_separates_positive_negative_zero_and_history_rules() -> None:
+    # Monthly dates spanning < 1 year so all prior rows fall within the 365-day window.
+    base = pd.Timestamp("2024-01-01")
+    dates_4 = pd.Series([base + pd.DateOffset(months=i) for i in range(4)])
+    dates_6 = pd.Series([base + pd.DateOffset(months=i) for i in range(6)])
+
     positive_series = pd.Series([1.0, 2.0, 3.0, 2.5])
     negative_series = pd.Series([-1.0, -3.0, -2.0, -2.5])
     mixed_series = pd.Series([1.0, 2.0, 3.0, 0.0, float("nan"), 4.0])
 
-    positive_pct = compute_signed_rolling_percentile(positive_series, history_window=3)
-    negative_pct = compute_signed_rolling_percentile(negative_series, history_window=3)
-    mixed_pct = compute_signed_rolling_percentile(mixed_series, history_window=3)
+    positive_pct = compute_signed_rolling_percentile(positive_series, dates=dates_4)
+    negative_pct = compute_signed_rolling_percentile(negative_series, dates=dates_4)
+    mixed_pct = compute_signed_rolling_percentile(mixed_series, dates=dates_6)
 
-    assert positive_pct.iloc[:3].isna().all()
+    # Index 0: no history → NaN.
+    assert pd.isna(positive_pct.iloc[0])
+    assert pd.isna(negative_pct.iloc[0])
+
+    # Index 3 positive: history=[1,2,3], current=2.5 → 2 of 3 ≤ 2.5 → 2/3.
     assert positive_pct.iloc[3] == pytest.approx(2 / 3)
-    assert negative_pct.iloc[:3].isna().all()
+
+    # Index 3 negative: history=[-1,-3,-2], current=-2.5, abs_history=[1,3,2]
+    # abs ≤ 2.5 → {1,2} → 2/3, negated → -2/3.
     assert negative_pct.iloc[3] == pytest.approx(-2 / 3)
+
+    # Zero maps to 0.0 exactly.
     assert mixed_pct.iloc[3] == 0.0
+
+    # NaN source → NaN result.
     assert pd.isna(mixed_pct.iloc[4])
-    assert pd.isna(mixed_pct.iloc[5])
+
+    # Index 5, value=4.0: history=[1,2,3,0,NaN], positive_history=[1,2,3] all ≤ 4 → 1.0.
+    assert mixed_pct.iloc[5] == pytest.approx(1.0)
 
 
 def test_warmup_definition_matches_hist_plus_pct_requirement() -> None:
+    import math
+    from app.trend.features import HIST_WARMUP_BARS, PERCENTILE_CALENDAR_WINDOW, TOTAL_WARMUP_BARS
     assert compute_hist_warmup_bars() == 239
-    assert compute_total_warmup_bars() == 495
-    expected = (date(2024, 1, 1) - timedelta(days=724)).isoformat()
+    assert HIST_WARMUP_BARS == 239
+    assert PERCENTILE_CALENDAR_WINDOW == 365
+    assert TOTAL_WARMUP_BARS == HIST_WARMUP_BARS + math.ceil(PERCENTILE_CALENDAR_WINDOW * 5 / 7)
+    expected_lookback = math.ceil(TOTAL_WARMUP_BARS * 7 / 5) + 31
+    expected = (date(2024, 1, 1) - timedelta(days=expected_lookback)).isoformat()
     assert compute_fetch_start_date("2024-01-01") == expected
 
 
@@ -156,7 +175,6 @@ def test_compute_trend_features_for_ticker_uses_hist_and_fut_time_semantics(tmp_
         start_date=start_date,
         end_date=end_date,
         daily_db_path=db_path,
-        history_window=30,
     )
 
     spike_row = feature_df.loc[feature_df["datetime"] == spike_date.isoformat()].iloc[0]
@@ -267,7 +285,6 @@ def test_run_trend_feature_pipeline_updates_feature_store_and_exports_csv(tmp_pa
         daily_db_path=daily_db_path,
         feature_db_path=feature_db_path,
         output_csv_dir=output_csv_dir,
-        history_window=30,
     )
 
     assert result.failed_tickers == []
@@ -317,7 +334,6 @@ def test_update_feature_db_writes_only_available_trade_dates(tmp_path: Path) -> 
         end_date,
         daily_db_path=daily_db_path,
         feature_db_path=feature_db_path,
-        history_window=30,
     )
 
     rows = load_feature_rows(
@@ -352,7 +368,6 @@ def test_update_feature_db_delegates_daily_sync_to_update_daily_db(tmp_path: Pat
         end_date,
         daily_db_path=daily_db_path,
         feature_db_path=feature_db_path,
-        history_window=30,
     )
 
     assert result is True
@@ -376,7 +391,6 @@ def test_update_feature_db_backfills_recent_rows_when_future_window_matures(tmp_
         first_end,
         daily_db_path=daily_db_path,
         feature_db_path=feature_db_path,
-        history_window=30,
     )
 
     with connect_sqlite(feature_db_path) as connection:
@@ -397,7 +411,6 @@ def test_update_feature_db_backfills_recent_rows_when_future_window_matures(tmp_
         second_end,
         daily_db_path=daily_db_path,
         feature_db_path=feature_db_path,
-        history_window=30,
     )
 
     with connect_sqlite(feature_db_path) as connection:
@@ -416,7 +429,6 @@ def test_update_feature_db_reuses_existing_cached_ranges_outside_new_gaps(tmp_pa
     daily_db_path = tmp_path / "daily.db"
     feature_db_path = tmp_path / "feature.db"
     ticker = "SPY"
-    history_window = 30
 
     _seed_daily_db(daily_db_path, ticker=ticker, start=date(2022, 1, 3), end=date(2026, 1, 31))
     _seed_feature_cache(
@@ -425,7 +437,6 @@ def test_update_feature_db_reuses_existing_cached_ranges_outside_new_gaps(tmp_pa
         ticker=ticker,
         start_date=date(2024, 1, 2),
         end_date=date(2024, 3, 29),
-        history_window=history_window,
     )
     cached_2025 = _seed_feature_cache(
         daily_db_path=daily_db_path,
@@ -433,7 +444,6 @@ def test_update_feature_db_reuses_existing_cached_ranges_outside_new_gaps(tmp_pa
         ticker=ticker,
         start_date=date(2025, 1, 2),
         end_date=date(2025, 10, 31),
-        history_window=history_window,
     )
 
     sentinel_date = "2025-06-02"
@@ -446,7 +456,6 @@ def test_update_feature_db_reuses_existing_cached_ranges_outside_new_gaps(tmp_pa
         date(2026, 1, 31),
         daily_db_path=daily_db_path,
         feature_db_path=feature_db_path,
-        history_window=history_window,
     )
 
     with connect_sqlite(feature_db_path) as connection:

@@ -9,7 +9,6 @@ from app.trend.features import (
     DEFAULT_OUTPUT_CSV_DIR,
     DEFAULT_TABLE_NAME,
     OUTPUT_COLUMNS,
-    PERCENTILE_HISTORY_WINDOW,
     TrendFeatureRunResult,
     _compute_linear_slope,
     compute_fetch_start_date,
@@ -32,7 +31,6 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--daily-db-path", default=str(DEFAULT_DAILY_DB_PATH))
     parser.add_argument("--feature-db-path", default=str(DEFAULT_FEATURE_DB_PATH))
     parser.add_argument("--output-csv-dir", default=str(DEFAULT_OUTPUT_CSV_DIR))
-    parser.add_argument("--history-window", type=int, default=PERCENTILE_HISTORY_WINDOW)
     parser.add_argument("--table-name", default=DEFAULT_TABLE_NAME)
     return parser
 
@@ -49,7 +47,6 @@ def main() -> int:
         daily_db_path=args.daily_db_path,
         feature_db_path=args.feature_db_path,
         output_csv_dir=args.output_csv_dir,
-        history_window=args.history_window,
         table_name=args.table_name,
     )
 

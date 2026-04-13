@@ -25,7 +25,7 @@ DEFAULT_FEATURE_DB_PATH = PROJECT_ROOT / "data" / "feature.db"
 DEFAULT_OUTPUT_CSV_DIR = PROJECT_ROOT / "data" / "processed" / "features"
 DEFAULT_TABLE_NAME = "trend_features_daily"
 
-PERCENTILE_HISTORY_WINDOW = 256
+PERCENTILE_CALENDAR_WINDOW = 365
 DRV_WINDOWS: tuple[int, ...] = (2, 5)
 REQUIRED_PRICE_COLUMNS = (
     "datetime",
@@ -241,7 +241,9 @@ COLUMN_TYPE_BY_NAME = {
 
 HIST_MAX_WINDOW = max(window for _, window in HIST_WINDOW_SPECS)
 HIST_WARMUP_BARS = HIST_MAX_WINDOW + (HIST_MAX_WINDOW - 1)
-TOTAL_WARMUP_BARS = HIST_WARMUP_BARS + PERCENTILE_HISTORY_WINDOW
+# Bar-equivalent of the percentile calendar window, used for compute-window sizing.
+_PERCENTILE_WARMUP_BARS = math.ceil(PERCENTILE_CALENDAR_WINDOW * 5 / 7)
+TOTAL_WARMUP_BARS = HIST_WARMUP_BARS + _PERCENTILE_WARMUP_BARS
 FUTURE_BACKFILL_BARS = max(right_offset for _, _, right_offset in FUT_WINDOW_SPECS)
 FUTURE_CONTEXT_CALENDAR_DAYS = 31
 
@@ -340,19 +342,11 @@ def compute_hist_warmup_bars() -> int:
     return HIST_WARMUP_BARS
 
 
-def compute_total_warmup_bars(history_window: int = PERCENTILE_HISTORY_WINDOW) -> int:
-    if history_window <= 0:
-        raise ValueError("history_window must be greater than 0.")
-    return HIST_WARMUP_BARS + history_window
-
-
 def compute_fetch_start_date(
     start_date: str | date | datetime,
-    history_window: int = PERCENTILE_HISTORY_WINDOW,
 ) -> str:
     start = _coerce_date(start_date)
-    warmup_bars = compute_total_warmup_bars(history_window=history_window)
-    calendar_lookback_days = math.ceil(warmup_bars * 7 / 5) + 31
+    calendar_lookback_days = math.ceil(TOTAL_WARMUP_BARS * 7 / 5) + 31
     return (start - timedelta(days=calendar_lookback_days)).isoformat()
 
 
@@ -579,13 +573,23 @@ def compute_fut_derived_features(df: pd.DataFrame) -> pd.DataFrame:
 
 def compute_signed_rolling_percentile(
     series: pd.Series,
-    history_window: int = PERCENTILE_HISTORY_WINDOW,
+    dates: pd.Series,
 ) -> pd.Series:
-    if history_window <= 0:
-        raise ValueError("history_window must be greater than 0.")
+    """Compute a signed rolling percentile using a 1-year natural-time window.
 
+    For each row the lookback window covers all preceding rows whose date falls
+    within [current_date - 365 days, current_date).  The number of bars in the
+    window varies with market calendar; no minimum bar count is enforced.
+
+    Positive values are ranked against the positive sub-history; negative
+    values against the absolute negative sub-history (result negated).  A row
+    produces NaN when the current value is non-zero but no same-sign value
+    exists in the window, or when the current value itself is NaN.
+    """
     numeric_series = pd.to_numeric(series, errors="coerce")
+    parsed_dates = pd.to_datetime(dates, errors="coerce")
     result = pd.Series(np.nan, index=numeric_series.index, dtype=float)
+    window_delta = pd.Timedelta(days=PERCENTILE_CALENDAR_WINDOW)
 
     for index in range(len(numeric_series)):
         current = numeric_series.iloc[index]
@@ -594,20 +598,19 @@ def compute_signed_rolling_percentile(
         if current == 0:
             result.iloc[index] = 0.0
             continue
-        if index < history_window:
+        current_date = parsed_dates.iloc[index]
+        if pd.isna(current_date):
             continue
-
-        history = numeric_series.iloc[index - history_window : index]
-        if history.notna().sum() < history_window:
-            continue
-
+        cutoff_date = current_date - window_delta
+        past_values = numeric_series.iloc[:index]
+        past_dates = parsed_dates.iloc[:index]
+        history = past_values[(past_dates >= cutoff_date) & (past_dates < current_date)]
         if current > 0:
             positive_history = history[history > 0]
             if positive_history.empty:
                 continue
             result.iloc[index] = float((positive_history <= current).mean())
             continue
-
         negative_history_abs = history[history < 0].abs()
         if negative_history_abs.empty:
             continue
@@ -616,16 +619,14 @@ def compute_signed_rolling_percentile(
     return result
 
 
-def add_percentile_columns(
-    df: pd.DataFrame,
-    history_window: int = PERCENTILE_HISTORY_WINDOW,
-) -> pd.DataFrame:
+def add_percentile_columns(df: pd.DataFrame) -> pd.DataFrame:
     result = df.copy()
+    dates = result["datetime"]
     percentile_data: dict[str, pd.Series] = {}
     for source_column, percentile_column in FEATURE_VALUE_TO_PERCENTILE_COLUMN.items():
         percentile_data[percentile_column] = compute_signed_rolling_percentile(
             result[source_column],
-            history_window=history_window,
+            dates=dates,
         )
     if percentile_data:
         percentile_df = pd.DataFrame(percentile_data, index=result.index)
@@ -633,11 +634,7 @@ def add_percentile_columns(
     return result
 
 
-def build_trend_feature_frame(
-    df: pd.DataFrame,
-    *,
-    history_window: int = PERCENTILE_HISTORY_WINDOW,
-) -> pd.DataFrame:
+def build_trend_feature_frame(df: pd.DataFrame) -> pd.DataFrame:
     result = build_hist_reference_columns(df)
     result = compute_hist_ma_features(result)
     result = compute_hist_slope_features(result)
@@ -645,7 +642,7 @@ def build_trend_feature_frame(
     result = compute_hist_derived_features(result)
     result = compute_fut_core_features(result)
     result = compute_fut_derived_features(result)
-    result = add_percentile_columns(result, history_window=history_window)
+    result = add_percentile_columns(result)
 
     for column in OUTPUT_COLUMNS:
         if column not in result.columns:
@@ -770,14 +767,13 @@ def compute_trend_features_for_ticker(
     end_date: str | date | datetime,
     daily_db_path: str | Path = DEFAULT_DAILY_DB_PATH,
     use_update: bool = False,
-    history_window: int = PERCENTILE_HISTORY_WINDOW,
 ) -> pd.DataFrame:
     start = _coerce_date(start_date)
     end = _coerce_date(end_date)
     if end < start:
         raise ValueError("end_date must be greater than or equal to start_date.")
 
-    fetch_start_date = compute_fetch_start_date(start, history_window=history_window)
+    fetch_start_date = compute_fetch_start_date(start)
     daily_df = load_daily_data_for_feature_research(
         ticker=ticker,
         fetch_start_date=fetch_start_date,
@@ -785,7 +781,7 @@ def compute_trend_features_for_ticker(
         daily_db_path=daily_db_path,
         use_update=use_update,
     )
-    feature_df = build_trend_feature_frame(daily_df, history_window=history_window)
+    feature_df = build_trend_feature_frame(daily_df)
     clipped = clip_to_output_range(feature_df, start_date=start, end_date=end)
     if clipped.empty:
         raise RuntimeError(
@@ -810,7 +806,6 @@ def run_trend_feature_pipeline(
     daily_db_path: str | Path = DEFAULT_DAILY_DB_PATH,
     feature_db_path: str | Path = DEFAULT_FEATURE_DB_PATH,
     output_csv_dir: str | Path = DEFAULT_OUTPUT_CSV_DIR,
-    history_window: int = PERCENTILE_HISTORY_WINDOW,
     table_name: str = DEFAULT_TABLE_NAME,
 ) -> TrendFeatureRunResult:
     if not tickers:
@@ -829,7 +824,6 @@ def run_trend_feature_pipeline(
                 end_date=end_date,
                 daily_db_path=daily_db_path,
                 feature_db_path=feature_db_path,
-                history_window=history_window,
                 table_name=table_name,
             )
             ticker_df = load_feature_rows(
@@ -945,13 +939,12 @@ def _resolve_actual_warmup_start(
     *,
     daily_df: pd.DataFrame,
     target_start_date: str,
-    history_window: int = PERCENTILE_HISTORY_WINDOW,
 ) -> str:
     matches = daily_df.index[daily_df["datetime"] == target_start_date]
     if len(matches) == 0:
         raise RuntimeError(f"Target start date {target_start_date} was not found in daily data.")
     target_index = int(matches[0])
-    warmup_index = max(0, target_index - compute_total_warmup_bars(history_window=history_window))
+    warmup_index = max(0, target_index - TOTAL_WARMUP_BARS)
     return str(daily_df.iloc[warmup_index]["datetime"])
 
 
@@ -974,7 +967,6 @@ def update_feature_db(
     daily_db_path: str | Path = DEFAULT_DAILY_DB_PATH,
     feature_db_path: str | Path = DEFAULT_FEATURE_DB_PATH,
     table_name: str = DEFAULT_TABLE_NAME,
-    history_window: int = PERCENTILE_HISTORY_WINDOW,
 ) -> bool:
     start = _coerce_date(start_date)
     end = _coerce_date(end_date)
@@ -983,7 +975,7 @@ def update_feature_db(
 
     init_price_db(daily_db_path, "daily_bars")
     init_feature_db(feature_db_path=feature_db_path, table_name=table_name)
-    fetch_start_date = compute_fetch_start_date(start, history_window=history_window)
+    fetch_start_date = compute_fetch_start_date(start)
 
     update_daily_db(
         ticker=ticker,
@@ -1066,7 +1058,6 @@ def update_feature_db(
         warmup_start_date = _resolve_actual_warmup_start(
             daily_df=full_daily_df,
             target_start_date=recalc_start_date,
-            history_window=history_window,
         )
         compute_daily_df = (
             full_daily_df.loc[
@@ -1077,7 +1068,7 @@ def update_feature_db(
             .reset_index(drop=True)
         )
 
-        feature_df = build_trend_feature_frame(compute_daily_df, history_window=history_window)
+        feature_df = build_trend_feature_frame(compute_daily_df)
         segment_feature_df = _slice_feature_rows_for_dates(feature_df, persist_dates)
         save_features_to_sqlite(segment_feature_df, sqlite_path=feature_db_path, table_name=table_name)
 
@@ -1126,7 +1117,7 @@ __all__ = [
     "DEFAULT_TABLE_NAME",
     "MAFeatures",
     "OUTPUT_COLUMNS",
-    "PERCENTILE_HISTORY_WINDOW",
+    "PERCENTILE_CALENDAR_WINDOW",
     "TrendFeatureRunResult",
     "_compute_linear_slope",
     "add_percentile_columns",
@@ -1136,7 +1127,6 @@ __all__ = [
     "compute_hist_warmup_bars",
     "compute_ma_features",
     "compute_signed_rolling_percentile",
-    "compute_total_warmup_bars",
     "compute_trend_features_for_ticker",
     "init_feature_db",
     "load_daily_data_for_feature_research",

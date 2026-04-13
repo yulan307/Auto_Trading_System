@@ -1,4 +1,9 @@
 {
-  "active_version": null,
-  "versions": {}
+  "active_version": "buy/v001",
+  "versions": {
+    "buy/v001": {
+      "path": "D:\\Codes\\Auto_Trading_System\\models\\buy\\v001",
+      "promoted_at": "2026-04-13T16:40:28.508523+00:00"
+    }
+  }
 }

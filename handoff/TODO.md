@@ -2,15 +2,15 @@
 
 ## Now
 
-- Implement `app.trend.classifier.classify_trend`
-- Implement `app.trend.features.compute_ma_features`
-- Make `tests/test_backtest_minimal_loop.py` pass
+- Retrain models with updated feature data (old feature.db rows used row-count percentile windows)
+- Review `docs/system_design.md` Phase 2 scope and pick the next increment
+- Expand backtest engine with sell-side logic and position sizing
 
 ## Next
 
 - Reconcile `README.md` scope notes with the newer status in `CLAUDE.md`
-- Add focused tests for trend feature computation and backtest integration
-- Document any new runtime assumptions in `docs/`
+- Document new runtime assumptions added in Phase 1 close-out (`docs/`)
+- Wire up paper trading mode (data source + account source injection)
 
 ## Later
 

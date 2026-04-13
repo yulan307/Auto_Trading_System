@@ -26,11 +26,14 @@ python scripts/init_db.py --config config/backtest.yaml
 # Compute trend features for a ticker
 python scripts/compute_trend_features.py --config config/backtest.yaml --ticker SPY --output-csv
 
-# Train buy-strength ML model
-python scripts/train_buy_sub_ml.py --config config/backtest.yaml --non-interactive
+# Train buy-strength ML model (new model named v001, using SPY data up to 2026-01-01)
+python scripts/train_buy_sub_ml.py --tickers SPY --end-date 2026-01-01 --mode new --model v001
 
-# Run inference
-python scripts/infer_buy_sub_ml.py --config config/backtest.yaml --ticker SPY --model-reference buy/v001
+# Update an existing model (retrain from buy/v001 as base)
+python scripts/train_buy_sub_ml.py --tickers SPY --end-date 2026-01-01 --mode update --model buy/v001
+
+# Run inference (non-interactive)
+python scripts/infer_buy_sub_ml.py --tickers SPY --start-date 2025-06-01 --end-date 2026-01-01 --mode infer --model buy/v001
 
 # Run backtest
 python scripts/run_backtest.py --config config/backtest.yaml --ticker SPY --start-date 2025-01-01 --end-date 2025-12-31 --output outputs/result.json
@@ -83,7 +86,13 @@ Three-stage pipeline: **label generation** (`buy_strength_label/`) → **trainin
 
 ## Current Development Status
 
-Phase 1 foundation is complete. The minimal backtest closed loop is partially implemented: `app/backtest/engine.py` imports `app.trend.classifier.classify_trend` and `app.trend.features.compute_ma_features` which are not yet implemented. As a result, `tests/test_backtest_minimal_loop.py` currently fails at import time — all other tests pass.
+Phase 1 foundation is complete. All 32 tests pass. The ML subsystem is end-to-end functional:
+- `app/trend/classifier.py` and `app/trend/features.py` are implemented
+- `tests/test_backtest_minimal_loop.py` passes
+- Training (`scripts/train_buy_sub_ml.py`) and inference (`scripts/infer_buy_sub_ml.py`) scripts run successfully end-to-end
+- A trained model `buy/v001` exists under `models/buy/v001/`
+
+Current focus: expanding the backtest engine toward a full closed-loop simulation (Phase 2).
 
 ## Documentation
 
