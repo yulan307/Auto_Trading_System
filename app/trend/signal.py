@@ -32,6 +32,25 @@ def generate_daily_signal(
     )
 
     if not can_buy:
+        can_sell = (
+            trend_decision.sell_threshold_pct is not None
+            and position is not None
+            and position.quantity > 0
+        )
+        if can_sell:
+            base_price = max(float(daily_open), float(daily_close))
+            target_price = base_price * (1 + float(trend_decision.sell_threshold_pct))
+            estimated_proceeds = float(position.quantity * position.market_price)
+            return DailySignal(
+                trade_date=trade_date,
+                ticker=ticker,
+                action="sell",
+                target_price=target_price,
+                planned_amount_usd=estimated_proceeds,
+                allowed_cash_today=0.0,
+                final_amount_usd=estimated_proceeds,
+                reason=f"sell:{trend_decision.trend_type}",
+            )
         return DailySignal(
             trade_date=trade_date,
             ticker=ticker,

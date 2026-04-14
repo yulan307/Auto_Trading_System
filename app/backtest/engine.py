@@ -8,7 +8,7 @@ from uuid import uuid4
 
 from app.account.models import TradeRecord
 from app.account.repository import AccountRepository
-from app.account.virtual_account import apply_filled_trade, reset_virtual_account
+from app.account.virtual_account import apply_filled_trade, reset_for_backtest
 from app.data.repository import load_bars
 from app.execution.mock_broker import MockBroker
 from app.execution.models import OrderRequest
@@ -20,6 +20,11 @@ from app.trend.signal import generate_daily_signal
 
 
 MIN_TREND_BARS = 63
+
+
+def _to_json_safe(d: dict) -> dict:
+    """Convert date/datetime fields to isoformat strings for JSON serialization."""
+    return {k: v.isoformat() if isinstance(v, (date, datetime)) else v for k, v in d.items()}
 
 
 def _to_trade_date(value: str) -> date:
@@ -57,9 +62,7 @@ def run_backtest(*, ticker: str, start_date, end_date, runtime_context) -> dict:
     account_repository = AccountRepository(config["data"]["account_db_path"])
     symbol_repository = SymbolRepository(config["data"]["symbols_db_path"])
 
-    snapshot = account_repository.get_account_snapshot()
-    if snapshot is None:
-        reset_virtual_account(float(config["account"]["initial_cash"]), account_repository, mode="backtest")
+    reset_for_backtest(float(config["account"]["initial_cash"]), account_repository)
 
     symbol = symbol_repository.get_symbol(ticker) or _build_default_symbol(ticker, runtime_context)
 
@@ -118,8 +121,8 @@ def run_backtest(*, ticker: str, start_date, end_date, runtime_context) -> dict:
         decisions.append(
             {
                 "trade_date": trade_date.isoformat(),
-                "decision": asdict(decision),
-                "signal": asdict(daily_signal),
+                "decision": _to_json_safe(asdict(decision)),
+                "signal": _to_json_safe(asdict(daily_signal)),
             }
         )
         logger.log_event(
@@ -137,68 +140,121 @@ def run_backtest(*, ticker: str, start_date, end_date, runtime_context) -> dict:
             },
         )
 
-        if daily_signal.action != "buy" or daily_signal.target_price is None or daily_signal.final_amount_usd <= 0:
-            continue
-        if float(bar["low"]) > float(daily_signal.target_price):
-            continue
-
-        fill_price = float(daily_signal.target_price)
-        requested_amount = float(daily_signal.final_amount_usd)
-        raw_quantity = requested_amount / fill_price
-        allow_fractional = bool(symbol.allow_fractional)
-        quantity = raw_quantity if allow_fractional else floor(raw_quantity)
-        if quantity <= 0:
-            continue
-        filled_amount = float(quantity * fill_price)
-
-        order_request = OrderRequest(
-            ticker=ticker,
-            side="buy",
-            order_type="limit",
-            price=fill_price,
-            amount_usd=filled_amount,
-            quantity=quantity,
-            reason=daily_signal.reason,
-            strategy_tag="trend_rebound_minimal",
-        )
-        order_status = broker.place_order(order_request)
-
         trade_time = datetime.combine(trade_date, datetime.min.time(), tzinfo=timezone.utc)
-        trade_record = TradeRecord(
-            trade_id=f"bt-{uuid4().hex[:12]}",
-            order_id=order_status.order_id,
-            ticker=ticker,
-            side="buy",
-            quantity=quantity,
-            price=fill_price,
-            amount=filled_amount,
-            fee=0.0,
-            trade_time=trade_time,
-            mode="backtest",
-            broker="mock",
-            note="filled_on_daily_low_touch",
-        )
-        apply_filled_trade(trade_record, account_repository)
 
-        trades.append(
-            {
-                "trade_date": trade_date.isoformat(),
-                "order_id": order_status.order_id,
-                "side": "buy",
-                "price": fill_price,
-                "quantity": quantity,
-                "amount": filled_amount,
-                "reason": daily_signal.reason,
-            }
-        )
-        logger.log_event(
-            level="INFO",
-            module="backtest.engine",
-            event_type="order_fill",
-            message="mock buy filled",
-            ticker=ticker,
-            payload=trades[-1],
-        )
+        if (
+            daily_signal.action == "buy"
+            and daily_signal.target_price is not None
+            and daily_signal.final_amount_usd > 0
+            and float(bar["low"]) <= float(daily_signal.target_price)
+        ):
+            fill_price = float(daily_signal.target_price)
+            raw_quantity = float(daily_signal.final_amount_usd) / fill_price
+            allow_fractional = bool(symbol.allow_fractional)
+            quantity = raw_quantity if allow_fractional else floor(raw_quantity)
+            if quantity > 0:
+                filled_amount = float(quantity * fill_price)
+                order_request = OrderRequest(
+                    ticker=ticker,
+                    side="buy",
+                    order_type="limit",
+                    price=fill_price,
+                    amount_usd=filled_amount,
+                    quantity=quantity,
+                    reason=daily_signal.reason,
+                    strategy_tag="trend_rebound_minimal",
+                )
+                order_status = broker.place_order(order_request)
+                trade_record = TradeRecord(
+                    trade_id=f"bt-{uuid4().hex[:12]}",
+                    order_id=order_status.order_id,
+                    ticker=ticker,
+                    side="buy",
+                    quantity=quantity,
+                    price=fill_price,
+                    amount=filled_amount,
+                    fee=0.0,
+                    trade_time=trade_time,
+                    mode="backtest",
+                    broker="mock",
+                    note="filled_on_daily_low_touch",
+                )
+                apply_filled_trade(trade_record, account_repository)
+                trades.append(
+                    {
+                        "trade_date": trade_date.isoformat(),
+                        "order_id": order_status.order_id,
+                        "side": "buy",
+                        "price": fill_price,
+                        "quantity": quantity,
+                        "amount": filled_amount,
+                        "reason": daily_signal.reason,
+                    }
+                )
+                logger.log_event(
+                    level="INFO",
+                    module="backtest.engine",
+                    event_type="order_fill",
+                    message="mock buy filled",
+                    ticker=ticker,
+                    payload=trades[-1],
+                )
+
+        elif (
+            daily_signal.action == "sell"
+            and daily_signal.target_price is not None
+            and position is not None
+            and position.quantity > 0
+            and float(bar["high"]) >= float(daily_signal.target_price)
+        ):
+            fill_price = float(daily_signal.target_price)
+            quantity = position.quantity
+            filled_amount = float(quantity * fill_price)
+            order_request = OrderRequest(
+                ticker=ticker,
+                side="sell",
+                order_type="limit",
+                price=fill_price,
+                amount_usd=filled_amount,
+                quantity=quantity,
+                reason=daily_signal.reason,
+                strategy_tag="trend_rebound_minimal",
+            )
+            order_status = broker.place_order(order_request)
+            trade_record = TradeRecord(
+                trade_id=f"bt-{uuid4().hex[:12]}",
+                order_id=order_status.order_id,
+                ticker=ticker,
+                side="sell",
+                quantity=quantity,
+                price=fill_price,
+                amount=filled_amount,
+                fee=0.0,
+                trade_time=trade_time,
+                mode="backtest",
+                broker="mock",
+                note="filled_on_daily_high_touch",
+            )
+            apply_filled_trade(trade_record, account_repository)
+            trades.append(
+                {
+                    "trade_date": trade_date.isoformat(),
+                    "order_id": order_status.order_id,
+                    "side": "sell",
+                    "price": fill_price,
+                    "quantity": quantity,
+                    "amount": filled_amount,
+                    "reason": daily_signal.reason,
+                }
+            )
+            logger.log_event(
+                level="INFO",
+                module="backtest.engine",
+                event_type="order_fill",
+                message="mock sell filled",
+                ticker=ticker,
+                payload=trades[-1],
+            )
 
     final_snapshot = account_repository.get_account_snapshot()
     latest_close = float(bars[-1]["close"])
@@ -220,7 +276,8 @@ def run_backtest(*, ticker: str, start_date, end_date, runtime_context) -> dict:
         "metrics": {
             "bars": len(bars),
             "decision_days": len(decisions),
-            "buy_trades": len(trades),
+            "buy_trades": sum(1 for t in trades if t["side"] == "buy"),
+            "sell_trades": sum(1 for t in trades if t["side"] == "sell"),
             "final_cash": final_cash,
             "marked_market_value": marked_market_value,
             "final_asset_estimate": final_asset_estimate,

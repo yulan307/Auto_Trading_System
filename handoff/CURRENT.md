@@ -5,34 +5,38 @@ Owner: Shared between Claude (day) and Codex (night)
 
 ## Active Goal
 
-Phase 1 foundation is complete. Signed percentile fix verified end-to-end with GOOGL inference.
-Next focus is Phase 2: expand backtest engine with sell-side logic and position sizing.
+Backtest closed loop is now functional (buy + sell). Branch `feature/closed-loop-backtest` is open as PR.
+Next: review PR, merge, then move to Phase 2 enhancements (multi-ticker, intraday fill, fee model).
 
 ## Confirmed Project State
 
 - Foundation, config/database scaffolding, and ML subsystem are fully in place
-- `app/trend/features.py` and `app/trend/classifier.py` are implemented
 - **All 32 tests pass** (`python -m pytest -q`)
-- `feature.db` is currently **empty** (cleared 2026-04-14; re-populate by running `compute_trend_features` per ticker)
+- `feature.db` is currently **empty** (cleared 2026-04-14; re-populate via `compute_trend_features`)
 - v001 model retrained with 6 tickers (DGRO, JEPI, MSFT, MU, NVDA, SPY), end-date 2026-04-14
-- GOOGL inference 2025-01-01 → 2026-04-14: 255 rows, 0 nulls — percentile fix confirmed working
+- Backtest closed loop works end-to-end: SPY 2025 → 14 buys, cash correctly deducted, JSON output clean
 
-## Signed Percentile Fix (session 3)
+## Closed Loop Fix (session 4 — branch feature/closed-loop-backtest)
 
-Root cause: `compute_signed_rolling_percentile` used a row-count window (256 bars). During sustained
-single-direction market periods (e.g., GOOGL 2022–2023 bear market), when values reversed sign in 2025,
-the 256-bar history had no same-sign values → NULL output for months.
+**Bugs fixed:**
+- JSON crash: `date` in TrendDecision/DailySignal not serializable → added `_to_json_safe()`
+- Cash not deducted: `apply_filled_trade` used historical trade_time for snapshot; reset snapshot
+  (wall-clock) was always newest → changed to `datetime.now()` for snapshot_time
+- Account not reset per run: only reset if snapshot was None → now always `reset_for_backtest()`
+  which clears positions + trade_records before writing fresh snapshot
 
-Fix: Switched to a 365-calendar-day lookback (`PERCENTILE_CALENDAR_WINDOW = 365`). The `dates`
-parameter is now required (no fallback). Removed `PERCENTILE_HISTORY_WINDOW`, `compute_total_warmup_bars`,
-`--history-window` CLI arg. `TOTAL_WARMUP_BARS` = 500, fetch lookback = 731 calendar days.
+**New features:**
+- Sell logic: downtrend sets `action_bias=sell_bias` + `sell_threshold_pct=0.005`; signal.py
+  generates sell signal when position held; engine fills on daily high touch (full position)
+- `config/backtest.yaml`: added `default_base_trade_amount_usd`, `default_max_position_usd`,
+  `default_weekly_budget_multiplier`
+- `metrics` now includes `sell_trades` count
 
 ## Recommended Next Actions
 
-1. Re-populate `feature.db` for all local tickers before running backtest
-   (`python scripts/compute_trend_features.py --tickers DGRO JEPI MSFT MU NVDA SPY --start-date ... --end-date ...`)
-2. Review `docs/system_design.md` Phase 2 tasks to pick the next increment
-3. Expand backtest engine with sell-side logic and position sizing
+1. Merge `feature/closed-loop-backtest` PR
+2. Re-populate `feature.db` for all local tickers
+3. Expand backtest: multi-ticker loop, fee model, intraday 15m fill
 
 ## Blockers
 
@@ -42,8 +46,7 @@ None currently.
 
 ```bash
 python -m pytest -q
-python scripts/train_buy_sub_ml.py --tickers DGRO JEPI MSFT MU NVDA SPY --end-date 2026-04-14 --mode new --model v001
-python scripts/infer_buy_sub_ml.py --tickers GOOGL --start-date 2025-01-01 --end-date 2026-04-14 --mode infer --model buy/v001
+python scripts/run_backtest.py --config config/backtest.yaml --ticker SPY --start-date 2025-01-01 --end-date 2025-12-31 --output outputs/backtest_spy_2025.json
 ```
 
 ## Session End Checklist

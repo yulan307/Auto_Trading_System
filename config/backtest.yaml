@@ -28,6 +28,9 @@ strategy:
   ma_windows: [5, 20, 60]
   intraday_interval: 15m
   last_bar_force_trade: true
+  default_base_trade_amount_usd: 1000.0
+  default_max_position_usd: 10000.0
+  default_weekly_budget_multiplier: 3.0
 
 ml:
   enabled: true
