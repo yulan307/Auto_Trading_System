@@ -23,6 +23,12 @@ def reset_virtual_account(initial_cash: float, repository: AccountRepository, mo
     repository.save_account_snapshot(snapshot)
 
 
+def reset_for_backtest(initial_cash: float, repository: AccountRepository) -> None:
+    """Clear all positions/trades and create a fresh account snapshot for a new backtest run."""
+    repository.clear_for_backtest()
+    reset_virtual_account(initial_cash, repository, mode="backtest")
+
+
 def get_account_snapshot(repository: AccountRepository):
     return repository.get_account_snapshot()
 
@@ -60,6 +66,8 @@ def apply_filled_trade(trade_record: TradeRecord, repository: AccountRepository)
                 unrealized_pnl=(trade_record.price - avg_cost) * new_quantity,
             )
         )
+    else:
+        repository.delete_position(trade_record.ticker)
 
     cash_change = -trade_record.amount - trade_record.fee if trade_record.side == "buy" else trade_record.amount - trade_record.fee
     new_cash = snapshot.cash_available + cash_change
@@ -67,7 +75,7 @@ def apply_filled_trade(trade_record: TradeRecord, repository: AccountRepository)
 
     repository.save_account_snapshot(
         AccountSnapshot(
-            snapshot_time=trade_record.trade_time,
+            snapshot_time=datetime.now(timezone.utc),
             mode=snapshot.mode,
             account_id=snapshot.account_id,
             cash_available=new_cash,

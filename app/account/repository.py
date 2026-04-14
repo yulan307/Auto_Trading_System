@@ -84,6 +84,16 @@ class AccountRepository:
                 ),
             )
 
+    def delete_position(self, ticker: str) -> None:
+        with connect_sqlite(self.db_path) as connection:
+            connection.execute("DELETE FROM positions WHERE ticker = ?", (ticker,))
+
+    def clear_for_backtest(self) -> None:
+        """Delete all positions and trade records — called at the start of each backtest run."""
+        with connect_sqlite(self.db_path) as connection:
+            connection.execute("DELETE FROM positions")
+            connection.execute("DELETE FROM trade_records")
+
     def get_recent_trade_stats(self, ticker: str, as_of_date: date) -> dict[str, float]:
         dt_end = datetime.combine(as_of_date, datetime.max.time())
         dt_5d = dt_end - timedelta(days=5)
