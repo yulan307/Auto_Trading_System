@@ -44,3 +44,15 @@
 - 清空 `feature.db`（`trend_features_daily` 表，6869 行），使旧的行数窗口数据失效
 - 用 6 个 ticker（DGRO, JEPI, MSFT, MU, NVDA, SPY）重新训练 v001，截止日 2026-04-14；2928 样本，146 特征，Pearson=0.502
 - 验证 GOOGL 推理（2025-01-01 → 2026-04-14）：255 行，0 个 null，从第一天起即有完整预测值，缺口问题彻底消除
+
+### Claude (session 5)
+
+- 创建分支 `feature/closed-loop-backtest`，完善回测闭环
+- 修复 JSON 序列化崩溃（`date` 对象不可序列化 → `_to_json_safe()`）
+- 修复现金未扣除 bug（`apply_filled_trade` 用历史 trade_time 做快照时间，reset 快照时间更晚 → 改为 `datetime.now()`）
+- 修复账户未重置问题（每次回测强制 `reset_for_backtest()`，清空 positions + trade_records）
+- 新增卖出逻辑：downtrend → `action_bias=sell_bias`，signal 生成卖出信号，engine 在日内 high 触价时全仓成交
+- `config/backtest.yaml` 补充策略默认参数
+- `metrics` 新增 `sell_trades` 字段
+- 验证：SPY 2025 全年 → 14 笔买入，现金 91163，持仓市值 9618，收益 +0.78%，32 个测试全过
+- PR 已提交：`feature/closed-loop-backtest` → `main`
