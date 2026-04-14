@@ -55,4 +55,9 @@
 - `config/backtest.yaml` 补充策略默认参数
 - `metrics` 新增 `sell_trades` 字段
 - 验证：SPY 2025 全年 → 14 笔买入，现金 91163，持仓市值 9618，收益 +0.78%，32 个测试全过
-- PR 已提交：`feature/closed-loop-backtest` → `main`
+- PR 已合并：`feature/closed-loop-backtest` → `main`（commit `e63bdca`）
+
+### Claude (session 6)
+
+- ML 信号接入设计完成，架构确认（`pred_strength_pct` 与 trend 平行进入 `generate_daily_signal`）
+- 设计未实现，完整方案已写入 `handoff/CURRENT.md` 供 Codex 接手
