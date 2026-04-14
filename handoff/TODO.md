@@ -2,17 +2,17 @@
 
 ## Now
 
-- Retrain models with updated feature data (old feature.db rows used row-count percentile windows)
-- Review `docs/system_design.md` Phase 2 scope and pick the next increment
-- Expand backtest engine with sell-side logic and position sizing
+- Wire `infer_buy_strength_signal_inputs()` into one real runtime path
+- Pass ML output through `generate_strength_signal()` before `generate_daily_signal()`
+- Decide whether `generate_trend_signal()` becomes the new public trend entry point or remains a wrapper
 
 ## Next
 
-- Reconcile `README.md` scope notes with the newer status in `CLAUDE.md`
-- Document new runtime assumptions added in Phase 1 close-out (`docs/`)
-- Wire up paper trading mode (data source + account source injection)
+- Replace default `buy_dev_pct = 1.0` with a real ML or rules-based source
+- Add runtime tests for the chosen integration loop
+- Document the same-day placeholder feature-row behavior in `docs/`
 
 ## Later
 
-- Reduce drift between top-level docs and actual implementation status
-- Expand handoff notes if the workflow becomes more multi-session or multi-device
+- Reconcile top-level docs with the newer ML runtime architecture
+- Expand multi-ticker runtime flow once the single-ticker ML signal path is stable

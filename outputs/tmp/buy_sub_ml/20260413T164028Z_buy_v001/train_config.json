@@ -1,0 +1,18 @@
+{
+  "backend": "auto",
+  "hidden_dims": [
+    64,
+    32
+  ],
+  "dropout": 0.1,
+  "learning_rate": 0.001,
+  "weight_decay": 1e-05,
+  "batch_size": 32,
+  "max_epochs": 200,
+  "patience": 20,
+  "loss_function": "mse",
+  "target_weight_alpha": 1.0,
+  "target_weight_gamma": 2.0,
+  "random_seed": 42,
+  "resolved_backend": "numpy_fallback"
+}

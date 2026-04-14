@@ -1,0 +1,20 @@
+{
+  "overall": {
+    "mae": 0.08438486841239301,
+    "rmse": 0.10987830447529463,
+    "r2": 0.24295457621919414,
+    "pearson": 0.6655309633605393,
+    "spearman": 0.5452273097224086,
+    "rows": 499.0
+  },
+  "fit_metrics": {
+    "fullfit_mae": 0.08438486841239301,
+    "fullfit_rmse": 0.10987830447529463,
+    "fullfit_r2": 0.24295457621919414,
+    "fullfit_pearson": 0.6655309633605393,
+    "fullfit_spearman": 0.5452273097224086,
+    "top5_overlap_count": 4.0,
+    "top10_overlap_count": 8.0,
+    "top20_overlap_count": 15.0
+  }
+}

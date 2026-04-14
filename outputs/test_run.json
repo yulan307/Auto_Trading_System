@@ -1,0 +1,4831 @@
+{
+  "ticker": "SPY",
+  "start_date": "2025-01-01",
+  "end_date": "2025-12-31",
+  "mode": "backtest",
+  "status": "completed",
+  "trades": [
+    {
+      "trade_date": "2025-05-20",
+      "order_id": "mock-7d4ba88ac55c",
+      "side": "buy",
+      "price": 589.8857257080078,
+      "quantity": 1,
+      "amount": 589.8857257080078,
+      "reason": "buy:uptrend"
+    },
+    {
+      "trade_date": "2025-05-27",
+      "order_id": "mock-79fc50487f34",
+      "side": "buy",
+      "price": 583.1396572875976,
+      "quantity": 1,
+      "amount": 583.1396572875976,
+      "reason": "buy:uptrend"
+    },
+    {
+      "trade_date": "2025-05-29",
+      "order_id": "mock-f1bb2b5fec0e",
+      "side": "buy",
+      "price": 587.0997378540039,
+      "quantity": 1,
+      "amount": 587.0997378540039,
+      "reason": "buy:uptrend"
+    },
+    {
+      "trade_date": "2025-05-30",
+      "order_id": "mock-bd33bd564675",
+      "side": "buy",
+      "price": 585.9853427124024,
+      "quantity": 1,
+      "amount": 585.9853427124024,
+      "reason": "buy:uptrend"
+    },
+    {
+      "trade_date": "2025-06-23",
+      "order_id": "mock-22d3059f3692",
+      "side": "buy",
+      "price": 592.064778137207,
+      "quantity": 1,
+      "amount": 592.064778137207,
+      "reason": "buy:uptrend"
+    },
+    {
+      "trade_date": "2025-07-16",
+      "order_id": "mock-2d5df3351aea",
+      "side": "buy",
+      "price": 620.6212902832032,
+      "quantity": 1,
+      "amount": 620.6212902832032,
+      "reason": "buy:uptrend"
+    },
+    {
+      "trade_date": "2025-08-20",
+      "order_id": "mock-3fb2ca7d2c87",
+      "side": "buy",
+      "price": 634.9194354248046,
+      "quantity": 1,
+      "amount": 634.9194354248046,
+      "reason": "buy:uptrend"
+    },
+    {
+      "trade_date": "2025-09-05",
+      "order_id": "mock-beb093de6058",
+      "side": "buy",
+      "price": 644.0037902832031,
+      "quantity": 1,
+      "amount": 644.0037902832031,
+      "reason": "buy:uptrend"
+    },
+    {
+      "trade_date": "2025-09-17",
+      "order_id": "mock-490ec089512b",
+      "side": "buy",
+      "price": 655.8840927124023,
+      "quantity": 1,
+      "amount": 655.8840927124023,
+      "reason": "buy:uptrend"
+    },
+    {
+      "trade_date": "2025-09-25",
+      "order_id": "mock-1343670a2dbb",
+      "side": "buy",
+      "price": 654.6503024291992,
+      "quantity": 1,
+      "amount": 654.6503024291992,
+      "reason": "buy:uptrend"
+    },
+    {
+      "trade_date": "2025-10-22",
+      "order_id": "mock-6a735ac7a562",
+      "side": "buy",
+      "price": 664.4609878540039,
+      "quantity": 1,
+      "amount": 664.4609878540039,
+      "reason": "buy:uptrend"
+    },
+    {
+      "trade_date": "2025-10-29",
+      "order_id": "mock-8053016bc775",
+      "side": "buy",
+      "price": 683.9530645751953,
+      "quantity": 1,
+      "amount": 683.9530645751953,
+      "reason": "buy:uptrend"
+    },
+    {
+      "trade_date": "2025-11-07",
+      "order_id": "mock-2759f53fd497",
+      "side": "buy",
+      "price": 664.5704232788086,
+      "quantity": 1,
+      "amount": 664.5704232788086,
+      "reason": "buy:uptrend"
+    },
+    {
+      "trade_date": "2025-12-16",
+      "order_id": "mock-8a6c3489ed5d",
+      "side": "buy",
+      "price": 675.4756451416016,
+      "quantity": 1,
+      "amount": 675.4756451416016,
+      "reason": "buy:uptrend"
+    }
+  ],
+  "decisions": [
+    {
+      "trade_date": "2025-04-03",
+      "decision": {
+        "trade_date": "2025-04-03",
+        "ticker": "SPY",
+        "trend_type": "downtrend",
+        "trend_strength": 1.0,
+        "action_bias": "sell_bias",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": 0.005,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "ma5<ma20<ma60"
+      },
+      "signal": {
+        "trade_date": "2025-04-03",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-04-04",
+      "decision": {
+        "trade_date": "2025-04-04",
+        "ticker": "SPY",
+        "trend_type": "downtrend",
+        "trend_strength": 1.0,
+        "action_bias": "sell_bias",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": 0.005,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "ma5<ma20<ma60"
+      },
+      "signal": {
+        "trade_date": "2025-04-04",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-04-07",
+      "decision": {
+        "trade_date": "2025-04-07",
+        "ticker": "SPY",
+        "trend_type": "downtrend",
+        "trend_strength": 1.0,
+        "action_bias": "sell_bias",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": 0.005,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "ma5<ma20<ma60"
+      },
+      "signal": {
+        "trade_date": "2025-04-07",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-04-08",
+      "decision": {
+        "trade_date": "2025-04-08",
+        "ticker": "SPY",
+        "trend_type": "downtrend",
+        "trend_strength": 1.0,
+        "action_bias": "sell_bias",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": 0.005,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "ma5<ma20<ma60"
+      },
+      "signal": {
+        "trade_date": "2025-04-08",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-04-09",
+      "decision": {
+        "trade_date": "2025-04-09",
+        "ticker": "SPY",
+        "trend_type": "downtrend",
+        "trend_strength": 1.0,
+        "action_bias": "sell_bias",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": 0.005,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "ma5<ma20<ma60"
+      },
+      "signal": {
+        "trade_date": "2025-04-09",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-04-10",
+      "decision": {
+        "trade_date": "2025-04-10",
+        "ticker": "SPY",
+        "trend_type": "downtrend",
+        "trend_strength": 1.0,
+        "action_bias": "sell_bias",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": 0.005,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "ma5<ma20<ma60"
+      },
+      "signal": {
+        "trade_date": "2025-04-10",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-04-11",
+      "decision": {
+        "trade_date": "2025-04-11",
+        "ticker": "SPY",
+        "trend_type": "downtrend",
+        "trend_strength": 1.0,
+        "action_bias": "sell_bias",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": 0.005,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "ma5<ma20<ma60"
+      },
+      "signal": {
+        "trade_date": "2025-04-11",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-04-14",
+      "decision": {
+        "trade_date": "2025-04-14",
+        "ticker": "SPY",
+        "trend_type": "downtrend",
+        "trend_strength": 1.0,
+        "action_bias": "sell_bias",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": 0.005,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "ma5<ma20<ma60"
+      },
+      "signal": {
+        "trade_date": "2025-04-14",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-04-15",
+      "decision": {
+        "trade_date": "2025-04-15",
+        "ticker": "SPY",
+        "trend_type": "downtrend",
+        "trend_strength": 1.0,
+        "action_bias": "sell_bias",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": 0.005,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "ma5<ma20<ma60"
+      },
+      "signal": {
+        "trade_date": "2025-04-15",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-04-16",
+      "decision": {
+        "trade_date": "2025-04-16",
+        "ticker": "SPY",
+        "trend_type": "downtrend",
+        "trend_strength": 1.0,
+        "action_bias": "sell_bias",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": 0.005,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "ma5<ma20<ma60"
+      },
+      "signal": {
+        "trade_date": "2025-04-16",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-04-17",
+      "decision": {
+        "trade_date": "2025-04-17",
+        "ticker": "SPY",
+        "trend_type": "downtrend",
+        "trend_strength": 1.0,
+        "action_bias": "sell_bias",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": 0.005,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "ma5<ma20<ma60"
+      },
+      "signal": {
+        "trade_date": "2025-04-17",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-04-21",
+      "decision": {
+        "trade_date": "2025-04-21",
+        "ticker": "SPY",
+        "trend_type": "downtrend",
+        "trend_strength": 1.0,
+        "action_bias": "sell_bias",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": 0.005,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "ma5<ma20<ma60"
+      },
+      "signal": {
+        "trade_date": "2025-04-21",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-04-22",
+      "decision": {
+        "trade_date": "2025-04-22",
+        "ticker": "SPY",
+        "trend_type": "downtrend",
+        "trend_strength": 1.0,
+        "action_bias": "sell_bias",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": 0.005,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "ma5<ma20<ma60"
+      },
+      "signal": {
+        "trade_date": "2025-04-22",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-04-23",
+      "decision": {
+        "trade_date": "2025-04-23",
+        "ticker": "SPY",
+        "trend_type": "downtrend",
+        "trend_strength": 1.0,
+        "action_bias": "sell_bias",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": 0.005,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "ma5<ma20<ma60"
+      },
+      "signal": {
+        "trade_date": "2025-04-23",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-04-24",
+      "decision": {
+        "trade_date": "2025-04-24",
+        "ticker": "SPY",
+        "trend_type": "downtrend",
+        "trend_strength": 1.0,
+        "action_bias": "sell_bias",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": 0.005,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "ma5<ma20<ma60"
+      },
+      "signal": {
+        "trade_date": "2025-04-24",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-04-25",
+      "decision": {
+        "trade_date": "2025-04-25",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-04-25",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-04-28",
+      "decision": {
+        "trade_date": "2025-04-28",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-04-28",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-04-29",
+      "decision": {
+        "trade_date": "2025-04-29",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-04-29",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-04-30",
+      "decision": {
+        "trade_date": "2025-04-30",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-04-30",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-05-01",
+      "decision": {
+        "trade_date": "2025-05-01",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-05-01",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-05-02",
+      "decision": {
+        "trade_date": "2025-05-02",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-05-02",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-05-05",
+      "decision": {
+        "trade_date": "2025-05-05",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-05-05",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-05-06",
+      "decision": {
+        "trade_date": "2025-05-06",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-05-06",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-05-07",
+      "decision": {
+        "trade_date": "2025-05-07",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-05-07",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-05-08",
+      "decision": {
+        "trade_date": "2025-05-08",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-05-08",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-05-09",
+      "decision": {
+        "trade_date": "2025-05-09",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-05-09",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-05-12",
+      "decision": {
+        "trade_date": "2025-05-12",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-05-12",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-05-13",
+      "decision": {
+        "trade_date": "2025-05-13",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-05-13",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-05-14",
+      "decision": {
+        "trade_date": "2025-05-14",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-05-14",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-05-15",
+      "decision": {
+        "trade_date": "2025-05-15",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-05-15",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-05-16",
+      "decision": {
+        "trade_date": "2025-05-16",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-05-16",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 588.29375,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-05-19",
+      "decision": {
+        "trade_date": "2025-05-19",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-05-19",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 585.1594757080078,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-05-20",
+      "decision": {
+        "trade_date": "2025-05-20",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-05-20",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 589.8857257080078,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-05-21",
+      "decision": {
+        "trade_date": "2025-05-21",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-05-21",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 579.9456854248047,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-05-22",
+      "decision": {
+        "trade_date": "2025-05-22",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-05-22",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 579.7466732788085,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-05-23",
+      "decision": {
+        "trade_date": "2025-05-23",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-05-23",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 573.1000805664063,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-05-27",
+      "decision": {
+        "trade_date": "2025-05-27",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-05-27",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 583.1396572875976,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-05-28",
+      "decision": {
+        "trade_date": "2025-05-28",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-05-28",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 584.7913305664063,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-05-29",
+      "decision": {
+        "trade_date": "2025-05-29",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-05-29",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 587.0997378540039,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-05-30",
+      "decision": {
+        "trade_date": "2025-05-30",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-05-30",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 585.9853427124024,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-06-02",
+      "decision": {
+        "trade_date": "2025-06-02",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-06-02",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 584.8212097167968,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-06-03",
+      "decision": {
+        "trade_date": "2025-06-03",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-06-03",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 589.3783267211915,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-06-04",
+      "decision": {
+        "trade_date": "2025-06-04",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-06-04",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 592.9503427124023,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-06-05",
+      "decision": {
+        "trade_date": "2025-06-05",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-06-05",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 590.084737854004,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-06-06",
+      "decision": {
+        "trade_date": "2025-06-06",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-06-06",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 595.6666732788086,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-06-09",
+      "decision": {
+        "trade_date": "2025-06-09",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-06-09",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 596.6815927124023,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-06-10",
+      "decision": {
+        "trade_date": "2025-06-10",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-06-10",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 597.2188708496094,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-06-11",
+      "decision": {
+        "trade_date": "2025-06-11",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-06-11",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 598.3531854248047,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-06-12",
+      "decision": {
+        "trade_date": "2025-06-12",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-06-12",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 597.0099597167969,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-06-13",
+      "decision": {
+        "trade_date": "2025-06-13",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-06-13",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 594.015,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-06-16",
+      "decision": {
+        "trade_date": "2025-06-16",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-06-16",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 597.3980242919922,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-06-17",
+      "decision": {
+        "trade_date": "2025-06-17",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-06-17",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 594.5423791503906,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-06-18",
+      "decision": {
+        "trade_date": "2025-06-18",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-06-18",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 594.4528024291992,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-06-20",
+      "decision": {
+        "trade_date": "2025-06-20",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-06-20",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 591.3086291503906,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-06-23",
+      "decision": {
+        "trade_date": "2025-06-23",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-06-23",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 592.064778137207,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-06-24",
+      "decision": {
+        "trade_date": "2025-06-24",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-06-24",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 601.3083670043945,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-06-25",
+      "decision": {
+        "trade_date": "2025-06-25",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-06-25",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 604.0843951416016,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-06-26",
+      "decision": {
+        "trade_date": "2025-06-26",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-06-26",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 605.9450402832031,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-06-27",
+      "decision": {
+        "trade_date": "2025-06-27",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-06-27",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 609.8156048583984,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-06-30",
+      "decision": {
+        "trade_date": "2025-06-30",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-06-30",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 614.2931048583985,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-07-01",
+      "decision": {
+        "trade_date": "2025-07-01",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-07-01",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 613.2781854248046,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-07-02",
+      "decision": {
+        "trade_date": "2025-07-02",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-07-02",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 614.1537902832031,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-07-03",
+      "decision": {
+        "trade_date": "2025-07-03",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-07-03",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 619.3377621459961,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-07-07",
+      "decision": {
+        "trade_date": "2025-07-07",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-07-07",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 617.5765927124023,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-07-08",
+      "decision": {
+        "trade_date": "2025-07-08",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-07-08",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 617.2383267211914,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-07-09",
+      "decision": {
+        "trade_date": "2025-07-09",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-07-09",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 619.6561694335937,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-07-10",
+      "decision": {
+        "trade_date": "2025-07-10",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-07-10",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 621.0790121459961,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-07-11",
+      "decision": {
+        "trade_date": "2025-07-11",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-07-11",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 619.6262902832032,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-07-14",
+      "decision": {
+        "trade_date": "2025-07-14",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-07-14",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 620.0441732788086,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-07-15",
+      "decision": {
+        "trade_date": "2025-07-15",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-07-15",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 619.0293145751953,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-07-16",
+      "decision": {
+        "trade_date": "2025-07-16",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-07-16",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 620.6212902832032,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-07-17",
+      "decision": {
+        "trade_date": "2025-07-17",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-07-17",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 621.2780242919922,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-07-18",
+      "decision": {
+        "trade_date": "2025-07-18",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-07-18",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 624.4421170043945,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-07-21",
+      "decision": {
+        "trade_date": "2025-07-21",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-07-21",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 625.6261694335938,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-07-22",
+      "decision": {
+        "trade_date": "2025-07-22",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-07-22",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 625.7156854248046,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-07-23",
+      "decision": {
+        "trade_date": "2025-07-23",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-07-23",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 628.392237854004,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-07-24",
+      "decision": {
+        "trade_date": "2025-07-24",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-07-24",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 631.2478829956054,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-07-25",
+      "decision": {
+        "trade_date": "2025-07-25",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-07-25",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 631.9145767211915,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-07-28",
+      "decision": {
+        "trade_date": "2025-07-28",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-07-28",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 633.7553024291992,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-07-29",
+      "decision": {
+        "trade_date": "2025-07-29",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-07-29",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 632.0837097167969,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-07-30",
+      "decision": {
+        "trade_date": "2025-07-30",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-07-30",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 631.287721862793,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-07-31",
+      "decision": {
+        "trade_date": "2025-07-31",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-07-31",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 628.9196170043946,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-08-01",
+      "decision": {
+        "trade_date": "2025-08-01",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-08-01",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 618.6113708496093,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-08-04",
+      "decision": {
+        "trade_date": "2025-08-04",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-08-04",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 622.5416329956055,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-08-05",
+      "decision": {
+        "trade_date": "2025-08-05",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-08-05",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 624.8301208496093,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-08-06",
+      "decision": {
+        "trade_date": "2025-08-06",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-08-06",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-08-07",
+      "decision": {
+        "trade_date": "2025-08-07",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-08-07",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-08-08",
+      "decision": {
+        "trade_date": "2025-08-08",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-08-08",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 630.8896975708008,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-08-11",
+      "decision": {
+        "trade_date": "2025-08-11",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-08-11",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 632.7403829956055,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-08-12",
+      "decision": {
+        "trade_date": "2025-08-12",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-08-12",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 635.098528137207,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-08-13",
+      "decision": {
+        "trade_date": "2025-08-13",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-08-13",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 641.6655645751953,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-08-14",
+      "decision": {
+        "trade_date": "2025-08-14",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-08-14",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 639.576028137207,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-08-15",
+      "decision": {
+        "trade_date": "2025-08-15",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-08-15",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 640.2228024291992,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-08-18",
+      "decision": {
+        "trade_date": "2025-08-18",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-08-18",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 639.6456854248047,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-08-19",
+      "decision": {
+        "trade_date": "2025-08-19",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-08-19",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 636.6109475708008,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-08-20",
+      "decision": {
+        "trade_date": "2025-08-20",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-08-20",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 634.9194354248046,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-08-21",
+      "decision": {
+        "trade_date": "2025-08-21",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-08-21",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 632.3722378540039,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-08-22",
+      "decision": {
+        "trade_date": "2025-08-22",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-08-22",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 634.5712097167968,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-08-25",
+      "decision": {
+        "trade_date": "2025-08-25",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-08-25",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 639.2576208496093,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-08-26",
+      "decision": {
+        "trade_date": "2025-08-26",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-08-26",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 638.9890121459961,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-08-27",
+      "decision": {
+        "trade_date": "2025-08-27",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-08-27",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 641.3471572875976,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-08-28",
+      "decision": {
+        "trade_date": "2025-08-28",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-08-28",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 644.0037902832031,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-08-29",
+      "decision": {
+        "trade_date": "2025-08-29",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-08-29",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 641.824737854004,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-09-02",
+      "decision": {
+        "trade_date": "2025-09-02",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-09-02",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 634.3125,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-09-03",
+      "decision": {
+        "trade_date": "2025-09-03",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-09-03",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 639.4566329956054,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-09-04",
+      "decision": {
+        "trade_date": "2025-09-04",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-09-04",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 641.1978829956055,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-09-05",
+      "decision": {
+        "trade_date": "2025-09-05",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-09-05",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 644.0037902832031,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-09-08",
+      "decision": {
+        "trade_date": "2025-09-08",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-09-08",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 645.3768951416016,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-09-09",
+      "decision": {
+        "trade_date": "2025-09-09",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-09-09",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 645.7251208496094,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-09-10",
+      "decision": {
+        "trade_date": "2025-09-10",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-09-10",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 648.948971862793,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-09-11",
+      "decision": {
+        "trade_date": "2025-09-11",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-09-11",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 650.9090927124023,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-09-12",
+      "decision": {
+        "trade_date": "2025-09-12",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-09-12",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 654.1229232788086,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-09-15",
+      "decision": {
+        "trade_date": "2025-09-15",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-09-15",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 656.3418145751953,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-09-16",
+      "decision": {
+        "trade_date": "2025-09-16",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-09-16",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 656.7,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-09-17",
+      "decision": {
+        "trade_date": "2025-09-17",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-09-17",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 655.8840927124023,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-09-18",
+      "decision": {
+        "trade_date": "2025-09-18",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-09-18",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 658.5805645751954,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-09-19",
+      "decision": {
+        "trade_date": "2025-09-19",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-09-19",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 659.0183670043946,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-09-22",
+      "decision": {
+        "trade_date": "2025-09-22",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-09-22",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 658.889012145996,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-09-23",
+      "decision": {
+        "trade_date": "2025-09-23",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-09-23",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 659.8939718627929,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-09-24",
+      "decision": {
+        "trade_date": "2025-09-24",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-09-24",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 657.7944757080078,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-09-25",
+      "decision": {
+        "trade_date": "2025-09-25",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-09-25",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 654.6503024291992,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-09-26",
+      "decision": {
+        "trade_date": "2025-09-26",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-09-26",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 656.2124597167968,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-09-29",
+      "decision": {
+        "trade_date": "2025-09-29",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-09-29",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 660.3615927124023,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-09-30",
+      "decision": {
+        "trade_date": "2025-09-30",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-09-30",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 659.6153427124024,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-10-01",
+      "decision": {
+        "trade_date": "2025-10-01",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-10-01",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 659.8541329956055,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-10-02",
+      "decision": {
+        "trade_date": "2025-10-02",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-10-02",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 665.8738708496094,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-10-03",
+      "decision": {
+        "trade_date": "2025-10-03",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-10-03",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 665.8639718627929,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-10-06",
+      "decision": {
+        "trade_date": "2025-10-06",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-10-06",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 668.2519354248046,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-10-07",
+      "decision": {
+        "trade_date": "2025-10-07",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-10-07",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 665.7743951416015,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-10-08",
+      "decision": {
+        "trade_date": "2025-10-08",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-10-08",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 666.89875,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-10-09",
+      "decision": {
+        "trade_date": "2025-10-09",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-10-09",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 667.8041732788085,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-10-10",
+      "decision": {
+        "trade_date": "2025-10-10",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-10-10",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 649.7549194335937,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-10-13",
+      "decision": {
+        "trade_date": "2025-10-13",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-10-13",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 657.3467742919922,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-10-14",
+      "decision": {
+        "trade_date": "2025-10-14",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-10-14",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-10-15",
+      "decision": {
+        "trade_date": "2025-10-15",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-10-15",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-10-16",
+      "decision": {
+        "trade_date": "2025-10-16",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-10-16",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-10-17",
+      "decision": {
+        "trade_date": "2025-10-17",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-10-17",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-10-20",
+      "decision": {
+        "trade_date": "2025-10-20",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-10-20",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-10-21",
+      "decision": {
+        "trade_date": "2025-10-21",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-10-21",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 667.9335281372071,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-10-22",
+      "decision": {
+        "trade_date": "2025-10-22",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-10-22",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 664.4609878540039,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-10-23",
+      "decision": {
+        "trade_date": "2025-10-23",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-10-23",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 664.7793951416015,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-10-24",
+      "decision": {
+        "trade_date": "2025-10-24",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-10-24",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 673.0777218627929,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-10-27",
+      "decision": {
+        "trade_date": "2025-10-27",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-10-27",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 679.3163305664062,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-10-28",
+      "decision": {
+        "trade_date": "2025-10-28",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-10-28",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 683.6147378540039,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-10-29",
+      "decision": {
+        "trade_date": "2025-10-29",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-10-29",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 683.9530645751953,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-10-30",
+      "decision": {
+        "trade_date": "2025-10-30",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-10-30",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 676.4308670043945,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-10-31",
+      "decision": {
+        "trade_date": "2025-10-31",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-10-31",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 678.6496975708008,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-11-03",
+      "decision": {
+        "trade_date": "2025-11-03",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-11-03",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 679.9233267211914,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-11-04",
+      "decision": {
+        "trade_date": "2025-11-04",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-11-04",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 671.8637902832031,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-11-05",
+      "decision": {
+        "trade_date": "2025-11-05",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-11-05",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 671.6050805664063,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-11-06",
+      "decision": {
+        "trade_date": "2025-11-06",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-11-06",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 666.9584475708008,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-11-07",
+      "decision": {
+        "trade_date": "2025-11-07",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-11-07",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 664.5704232788086,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-11-10",
+      "decision": {
+        "trade_date": "2025-11-10",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-11-10",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 673.8537902832031,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-11-11",
+      "decision": {
+        "trade_date": "2025-11-11",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-11-11",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 676.550262145996,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-11-12",
+      "decision": {
+        "trade_date": "2025-11-12",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-11-12",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 679.9631048583984,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-11-13",
+      "decision": {
+        "trade_date": "2025-11-13",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-11-13",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 668.679778137207,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-11-14",
+      "decision": {
+        "trade_date": "2025-11-14",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-11-14",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 662.0531048583985,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-11-17",
+      "decision": {
+        "trade_date": "2025-11-17",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-11-17",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-11-18",
+      "decision": {
+        "trade_date": "2025-11-18",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-11-18",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-11-19",
+      "decision": {
+        "trade_date": "2025-11-19",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-11-19",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-11-20",
+      "decision": {
+        "trade_date": "2025-11-20",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-11-20",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-11-21",
+      "decision": {
+        "trade_date": "2025-11-21",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-11-21",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-11-24",
+      "decision": {
+        "trade_date": "2025-11-24",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-11-24",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-11-25",
+      "decision": {
+        "trade_date": "2025-11-25",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-11-25",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-11-26",
+      "decision": {
+        "trade_date": "2025-11-26",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-11-26",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-11-28",
+      "decision": {
+        "trade_date": "2025-11-28",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-11-28",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 677.4556854248046,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-12-01",
+      "decision": {
+        "trade_date": "2025-12-01",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-12-01",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 675.4159475708008,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-12-02",
+      "decision": {
+        "trade_date": "2025-12-02",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-12-02",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 678.1223791503907,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-12-03",
+      "decision": {
+        "trade_date": "2025-12-03",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-12-03",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 677.1671572875977,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-12-04",
+      "decision": {
+        "trade_date": "2025-12-04",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-12-04",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 680.9680645751953,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-12-05",
+      "decision": {
+        "trade_date": "2025-12-05",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-12-05",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 682.0426208496094,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-12-08",
+      "decision": {
+        "trade_date": "2025-12-08",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-12-08",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 680.2118548583984,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-12-09",
+      "decision": {
+        "trade_date": "2025-12-09",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-12-09",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 679.624778137207,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-12-10",
+      "decision": {
+        "trade_date": "2025-12-10",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-12-10",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 679.1471975708008,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-12-11",
+      "decision": {
+        "trade_date": "2025-12-11",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-12-11",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 681.7143145751953,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-12-12",
+      "decision": {
+        "trade_date": "2025-12-12",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-12-12",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 678.3512097167969,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-12-15",
+      "decision": {
+        "trade_date": "2025-12-15",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-12-15",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 677.3263305664062,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-12-16",
+      "decision": {
+        "trade_date": "2025-12-16",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-12-16",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 675.4756451416016,
+        "planned_amount_usd": 1000.0,
+        "allowed_cash_today": 1000.0,
+        "final_amount_usd": 1000.0,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-12-17",
+      "decision": {
+        "trade_date": "2025-12-17",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-12-17",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 668.0430242919922,
+        "planned_amount_usd": 543.3409680175773,
+        "allowed_cash_today": 543.3409680175773,
+        "final_amount_usd": 543.3409680175773,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-12-18",
+      "decision": {
+        "trade_date": "2025-12-18",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-12-18",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 543.3409680175773,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-12-19",
+      "decision": {
+        "trade_date": "2025-12-19",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-12-19",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 543.3409680175773,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-12-22",
+      "decision": {
+        "trade_date": "2025-12-22",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-12-22",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 543.3409680175773,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-12-23",
+      "decision": {
+        "trade_date": "2025-12-23",
+        "ticker": "SPY",
+        "trend_type": "sideways",
+        "trend_strength": 0.5,
+        "action_bias": "hold",
+        "buy_threshold_pct": null,
+        "sell_threshold_pct": null,
+        "rebound_pct": null,
+        "budget_multiplier": 0.0,
+        "reason": "mixed_ma_order"
+      },
+      "signal": {
+        "trade_date": "2025-12-23",
+        "ticker": "SPY",
+        "action": "hold",
+        "target_price": null,
+        "planned_amount_usd": 0.0,
+        "allowed_cash_today": 543.3409680175773,
+        "final_amount_usd": 0.0,
+        "reason": "hold:below_min_trade_amount"
+      }
+    },
+    {
+      "trade_date": "2025-12-24",
+      "decision": {
+        "trade_date": "2025-12-24",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-12-24",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 684.5102621459961,
+        "planned_amount_usd": 543.3409680175773,
+        "allowed_cash_today": 543.3409680175773,
+        "final_amount_usd": 543.3409680175773,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-12-26",
+      "decision": {
+        "trade_date": "2025-12-26",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-12-26",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 686.8584475708008,
+        "planned_amount_usd": 543.3409680175773,
+        "allowed_cash_today": 543.3409680175773,
+        "final_amount_usd": 543.3409680175773,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-12-29",
+      "decision": {
+        "trade_date": "2025-12-29",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-12-29",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 684.102278137207,
+        "planned_amount_usd": 543.3409680175773,
+        "allowed_cash_today": 543.3409680175773,
+        "final_amount_usd": 543.3409680175773,
+        "reason": "buy:uptrend"
+      }
+    },
+    {
+      "trade_date": "2025-12-30",
+      "decision": {
+        "trade_date": "2025-12-30",
+        "ticker": "SPY",
+        "trend_type": "uptrend",
+        "trend_strength": 1.0,
+        "action_bias": "buy_bias",
+        "buy_threshold_pct": 0.005,
+        "sell_threshold_pct": null,
+        "rebound_pct": 0.003,
+        "budget_multiplier": 1.0,
+        "reason": "ma5>ma20>ma60"
+      },
+      "signal": {
+        "trade_date": "2025-12-30",
+        "ticker": "SPY",
+        "action": "buy",
+        "target_price": 683.5749597167969,
+        "planned_amount_usd": 543.3409680175773,
+        "allowed_cash_today": 543.3409680175773,
+        "final_amount_usd": 543.3409680175773,
+        "reason": "buy:uptrend"
+      }
+    }
+  ],
+  "metrics": {
+    "bars": 249,
+    "decision_days": 187,
+    "buy_trades": 14,
+    "sell_trades": 0,
+    "final_cash": 91163.28572631835,
+    "marked_market_value": 9618.14013671875,
+    "final_asset_estimate": 100781.4258630371,
+    "total_return_pct": 0.007814258630371041
+  },
+  "data_init": {
+    "ticker": "SPY",
+    "interval": "1d",
+    "fetched": 0,
+    "saved": 0,
+    "table": "daily_bars",
+    "source": "local",
+    "available_bars": 249
+  }
+}

@@ -46,3 +46,23 @@ class DailySignal:
         self.planned_amount_usd = ensure_numeric(self.planned_amount_usd, "planned_amount_usd")
         self.allowed_cash_today = ensure_numeric(self.allowed_cash_today, "allowed_cash_today")
         self.final_amount_usd = ensure_numeric(self.final_amount_usd, "final_amount_usd")
+
+
+@dataclass(slots=True)
+class StrengthSignal:
+    trade_date: date
+    ticker: str
+    strength_pct: float
+    buy_strength: float
+    buy_dev_pct: float
+    buy_activate_price: float | None
+    reason: str
+
+    def __post_init__(self) -> None:
+        ensure_non_empty_string(self.ticker, "ticker")
+        ensure_non_empty_string(self.reason, "reason")
+        self.strength_pct = ensure_numeric(self.strength_pct, "strength_pct")
+        self.buy_strength = ensure_numeric(self.buy_strength, "buy_strength")
+        self.buy_dev_pct = ensure_numeric(self.buy_dev_pct, "buy_dev_pct")
+        if self.buy_activate_price is not None:
+            self.buy_activate_price = ensure_numeric(self.buy_activate_price, "buy_activate_price")
