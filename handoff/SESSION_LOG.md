@@ -38,3 +38,9 @@
 - 更新了 `scripts/compute_trend_features.py`（移除 `--history-window` CLI 参数）
 - 更新了 `tests/test_compute_trend_features.py` 以匹配新 API，全部 32 个测试通过
 - 修复后 GOOGL NaN 行从 102 降至 4（真实边缘情况）
+
+### Claude (session 4)
+
+- 清空 `feature.db`（`trend_features_daily` 表，6869 行），使旧的行数窗口数据失效
+- 用 6 个 ticker（DGRO, JEPI, MSFT, MU, NVDA, SPY）重新训练 v001，截止日 2026-04-14；2928 样本，146 特征，Pearson=0.502
+- 验证 GOOGL 推理（2025-01-01 → 2026-04-14）：255 行，0 个 null，从第一天起即有完整预测值，缺口问题彻底消除
